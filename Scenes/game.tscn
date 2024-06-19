@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxwujsxboubra"]
+[gd_scene load_steps=20 format=3 uid="uid://dxwujsxboubra"]
 
 [ext_resource type="PackedScene" uid="uid://y5wafvwwae4l" path="res://Scenes/player.tscn" id="1_icq0n"]
 [ext_resource type="Texture2D" uid="uid://b8xup30obiljd" path="res://Assets/sprites/world_tileset.png" id="2_276ng"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b4lvrkie6o6px" path="res://Scenes/coin.tscn" id="4_74yda"]
 [ext_resource type="PackedScene" uid="uid://dbglhjvtg1lyp" path="res://Scenes/killzone.tscn" id="5_d7e8p"]
 [ext_resource type="PackedScene" uid="uid://ds0yvidhjewdb" path="res://Scenes/slime.tscn" id="6_ncu74"]
+[ext_resource type="FontFile" uid="uid://dulee83hm76jb" path="res://Assets/fonts/PixelOperator8.ttf" id="7_e6ip5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssm71"]
 texture = ExtResource("2_276ng")
@@ -665,3 +666,64 @@ autoplay = "move8"
 
 [node name="Slime" parent="." instance=ExtResource("6_ncu74")]
 position = Vector2(440, -300)
+
+[node name="Labels" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="Labels"]
+offset_left = 6.0
+offset_top = -56.0
+offset_right = 67.0
+offset_bottom = -34.0
+pivot_offset = Vector2(104, 97)
+theme_override_colors/font_color = Color(0.0117647, 0.14902, 0.34902, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "Space to
+jump"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Labels"]
+offset_left = 364.0
+offset_top = -67.0
+offset_right = 504.0
+offset_bottom = -48.0
+theme_override_colors/font_color = Color(0.0117647, 0.14902, 0.34902, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "It's a long way down..."
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Labels"]
+offset_left = 618.0
+offset_top = -150.0
+offset_right = 746.0
+offset_bottom = -83.0
+theme_override_colors/font_color = Color(0.0117647, 0.14902, 0.34902, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "Coins!
+You never know when
+you'll need them."
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Labels"]
+offset_left = 397.0
+offset_top = -328.0
+offset_right = 550.0
+offset_bottom = -261.0
+theme_override_colors/font_color = Color(0.0980392, 0.313726, 0.752941, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "Baddies want to hurt you"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Labels"]
+offset_left = 433.0
+offset_top = -493.0
+offset_right = 586.0
+offset_bottom = -478.0
+theme_override_colors/font_color = Color(0.0784314, 0.596078, 0.862745, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "Top of the world!"
+horizontal_alignment = 1
