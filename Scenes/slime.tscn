@@ -43,23 +43,27 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yo577"]
 size = Vector2(10, 12)
 
-[node name="Slime" type="Node2D"]
+[node name="Slime" type="CharacterBody2D"]
+position = Vector2(0, 6)
 script = ExtResource("1_xeqd8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_yoako")
 autoplay = "default"
 
 [node name="Killzone" parent="." instance=ExtResource("2_gwi3a")]
+position = Vector2(0, -6)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+[node name="Killbox" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_yo577")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
-position = Vector2(0, 6)
 target_position = Vector2(7, 0)
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
-position = Vector2(0, 6)
 target_position = Vector2(-7, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yo577")
