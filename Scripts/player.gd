@@ -8,6 +8,8 @@ const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var coyote_ray_cast_right = $CoyoteRayCastRight
+@onready var coyote_ray_cast_left = $CoyoteRayCastLeft
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -15,7 +17,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_ray_cast_left.is_colliding() or coyote_ray_cast_right.is_colliding()):
 		velocity.y = JUMP_VELOCITY
 
 	# Get the direction of movement. Can be -1, 0, or 1
