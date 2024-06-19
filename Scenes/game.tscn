@@ -1,12 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://dxwujsxboubra"]
+[gd_scene load_steps=22 format=3 uid="uid://dxwujsxboubra"]
 
 [ext_resource type="PackedScene" uid="uid://y5wafvwwae4l" path="res://Scenes/player.tscn" id="1_icq0n"]
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_svglu"]
 [ext_resource type="Texture2D" uid="uid://b8xup30obiljd" path="res://Assets/sprites/world_tileset.png" id="2_276ng"]
 [ext_resource type="PackedScene" uid="uid://bhuha41dp5xpw" path="res://Scenes/platform.tscn" id="3_6kgq8"]
 [ext_resource type="PackedScene" uid="uid://b4lvrkie6o6px" path="res://Scenes/coin.tscn" id="4_74yda"]
 [ext_resource type="PackedScene" uid="uid://dbglhjvtg1lyp" path="res://Scenes/killzone.tscn" id="5_d7e8p"]
 [ext_resource type="PackedScene" uid="uid://ds0yvidhjewdb" path="res://Scenes/slime.tscn" id="6_ncu74"]
 [ext_resource type="FontFile" uid="uid://dulee83hm76jb" path="res://Assets/fonts/PixelOperator8.ttf" id="7_e6ip5"]
+[ext_resource type="FontFile" uid="uid://bjwi0w48avk4g" path="res://Assets/fonts/PixelOperator8-Bold.ttf" id="9_iugmi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssm71"]
 texture = ExtResource("2_276ng")
@@ -528,6 +530,23 @@ _data = {
 
 [node name="Game" type="Node2D"]
 
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_svglu")
+
+[node name="ScoreLabel" type="Label" parent="GameManager"]
+offset_left = 431.0
+offset_top = -492.0
+offset_right = 584.0
+offset_bottom = -473.0
+theme_override_colors/font_color = Color(0.0784314, 0.596078, 0.862745, 1)
+theme_override_fonts/font = ExtResource("9_iugmi")
+theme_override_font_sizes/font_size = 8
+text = "Coins:
+x/21"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_n1sun")
 format = 2
@@ -718,10 +737,10 @@ text = "Baddies want to hurt you"
 horizontal_alignment = 1
 
 [node name="Label5" type="Label" parent="Labels"]
-offset_left = 433.0
-offset_top = -493.0
-offset_right = 586.0
-offset_bottom = -478.0
+offset_left = 432.0
+offset_top = -508.0
+offset_right = 585.0
+offset_bottom = -493.0
 theme_override_colors/font_color = Color(0.0784314, 0.596078, 0.862745, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
 theme_override_font_sizes/font_size = 8
