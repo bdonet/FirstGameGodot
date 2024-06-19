@@ -6,8 +6,10 @@ const SPEED = 50
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var direction = 1
-@onready var ray_cast_right = $RayCastRight
-@onready var ray_cast_left = $RayCastLeft
+@onready var ray_cast_wall_right = $RayCastWallRight
+@onready var ray_cast_wall_left = $RayCastWallLeft
+@onready var ray_cast_ledge_right = $RayCastLedgeRight
+@onready var ray_cast_ledge_left = $RayCastLedgeLeft
 @onready var animated_sprite = $AnimatedSprite2D
 
 func _physics_process(delta):
@@ -15,10 +17,10 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	if ray_cast_right.is_colliding():
+	if ray_cast_wall_right.is_colliding() or !ray_cast_ledge_right.is_colliding():
 		direction = -1
 		animated_sprite.flip_h = true
-	if ray_cast_left.is_colliding():
+	if ray_cast_wall_left.is_colliding() or !ray_cast_ledge_left.is_colliding():
 		direction = 1
 		animated_sprite.flip_h = false
 		

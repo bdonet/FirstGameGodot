@@ -684,7 +684,10 @@ libraries = {
 autoplay = "move8"
 
 [node name="Slime" parent="." instance=ExtResource("6_ncu74")]
-position = Vector2(440, -300)
+position = Vector2(441, -295)
+
+[node name="Slime2" parent="." instance=ExtResource("6_ncu74")]
+position = Vector2(88, -358)
 
 [node name="Labels" type="Node" parent="."]
 
@@ -726,10 +729,10 @@ you'll need them."
 horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="Labels"]
-offset_left = 397.0
-offset_top = -328.0
-offset_right = 550.0
-offset_bottom = -261.0
+offset_left = 398.0
+offset_top = -323.0
+offset_right = 551.0
+offset_bottom = -256.0
 theme_override_colors/font_color = Color(0.0980392, 0.313726, 0.752941, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
 theme_override_font_sizes/font_size = 8
