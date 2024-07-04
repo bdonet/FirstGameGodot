@@ -36,7 +36,7 @@ func _physics_process(delta):
 			animated_sprite.play("jump")
 	
 		# Handle jump.
-		if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_ray_cast_left.is_colliding() or coyote_ray_cast_right.is_colliding()):
+		if Input.is_action_just_pressed("jump") and (is_on_floor() or (coyote_ray_cast_left.is_colliding() and direction > 0) or (coyote_ray_cast_right.is_colliding() and direction < 0)):
 			velocity.y = JUMP_VELOCITY
 
 		# Flip the sprite to face the current direction
