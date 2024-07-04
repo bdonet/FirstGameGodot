@@ -60,6 +60,12 @@ func _physics_process(delta):
 			elif area_level_1_left.isColliding and !area_level_2_left.isColliding and direction <= 0:
 				position.y += -16
 				position.x += -8
+			if area_level_1_right.isColliding and area_level_2_right.isColliding and !area_level_3_right.isColliding and direction >= 0:
+				position.y += -32
+				position.x += 8
+			elif area_level_1_left.isColliding and area_level_2_left.isColliding and !area_level_3_left.isColliding and direction <= 0:
+				position.y += -32
+				position.x += -8
 			
 		# Flip the sprite to face the current direction
 		if direction > 0:
