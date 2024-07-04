@@ -6,7 +6,6 @@ const JUMP_VELOCITY = -250.0
 
 var isDead = false
 var jumpSaved = false
-var climbSaved = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -52,17 +51,13 @@ func _physics_process(delta):
 			jumpSaved = true
 			
 		# Handle short climb
-		if Input.is_action_just_pressed("climb") or climbSaved:
+		if Input.is_action_just_pressed("climb"):
 			if short_climb_wall_ray_cast_right.is_colliding() and !short_climb_air_ray_cast_right.is_colliding() and direction >= 0:
 				position.y += -16
 				position.x += 8
-				climbSaved = false
 			elif short_climb_wall_ray_cast_left.is_colliding() and !short_climb_air_ray_cast_left.is_colliding() and direction <= 0:
 				position.y += -16
 				position.x += -8
-				climbSaved = false				
-			else:
-				climbSaved = true
 			
 		# Flip the sprite to face the current direction
 		if direction > 0:
