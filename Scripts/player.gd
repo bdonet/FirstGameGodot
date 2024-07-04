@@ -5,6 +5,7 @@ const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 
 var isDead = false
+var jumpSaved = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -12,6 +13,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var coyote_ray_cast_right = $CoyoteRayCastRight
 @onready var coyote_ray_cast_left = $CoyoteRayCastLeft
+@onready var jump_save_ray_cast = $JumpSaveRayCast
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -36,9 +38,14 @@ func _physics_process(delta):
 			animated_sprite.play("jump")
 	
 		# Handle jump.
-		if Input.is_action_just_pressed("jump") and (is_on_floor() or (coyote_ray_cast_left.is_colliding() and direction > 0) or (coyote_ray_cast_right.is_colliding() and direction < 0)):
+		if (Input.is_action_just_pressed("jump") or jumpSaved) and (is_on_floor() or (coyote_ray_cast_left.is_colliding() and direction > 0) or (coyote_ray_cast_right.is_colliding() and direction < 0)):
 			velocity.y = JUMP_VELOCITY
-
+			jumpSaved = false
+			
+		# Handle jump just before hitting ground
+		if Input.is_action_just_pressed("jump") and !is_on_floor() and jump_save_ray_cast.is_colliding() and velocity.y > 0:
+			jumpSaved = true
+			
 		# Flip the sprite to face the current direction
 		if direction > 0:
 			animated_sprite.flip_h = false
