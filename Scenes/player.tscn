@@ -270,3 +270,19 @@ target_position = Vector2(-13, 0)
 [node name="JumpSaveRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, 1)
 target_position = Vector2(0, 14)
+
+[node name="ShortClimbWallRayCastRight" type="RayCast2D" parent="."]
+position = Vector2(4, -10)
+target_position = Vector2(10, 0)
+
+[node name="ShortClimbAirRayCastRight" type="RayCast2D" parent="."]
+position = Vector2(4, -21)
+target_position = Vector2(10, 0)
+
+[node name="ShortClimbWallRayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(-4, -10)
+target_position = Vector2(-10, 0)
+
+[node name="ShortClimbAirRayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(-4, -21)
+target_position = Vector2(-10, 0)
