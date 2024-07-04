@@ -54,9 +54,9 @@ func _physics_process(delta):
 		
 		# Move the player
 		if direction:
-			velocity.x = direction * SPEED
+			velocity.x = move_toward(velocity.x, direction * SPEED, SPEED * delta * 9)
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.x = move_toward(velocity.x, 0, SPEED * delta * 8)
 
 	# Apply the movement to the player
 	move_and_slide()
