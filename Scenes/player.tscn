@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://y5wafvwwae4l"]
+[gd_scene load_steps=32 format=3 uid="uid://y5wafvwwae4l"]
 
 [ext_resource type="Texture2D" uid="uid://ch3chr00827ip" path="res://Assets/sprites/knight.png" id="1_bgorp"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_i7ida"]
+[ext_resource type="PackedScene" uid="uid://cqvcnfqi5hyfn" path="res://Scenes/collision_area.tscn" id="3_u0ss2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2fs3s"]
 atlas = ExtResource("1_bgorp")
@@ -271,18 +272,20 @@ target_position = Vector2(-13, 0)
 position = Vector2(0, 1)
 target_position = Vector2(0, 14)
 
-[node name="ShortClimbWallRayCastRight" type="RayCast2D" parent="."]
-position = Vector2(4, -2)
-target_position = Vector2(10, 0)
+[node name="AreaLevel1Right" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(9, -8)
 
-[node name="ShortClimbAirRayCastRight" type="RayCast2D" parent="."]
-position = Vector2(4, -18)
-target_position = Vector2(10, 0)
+[node name="AreaLevel1Left" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(-9, -8)
 
-[node name="ShortClimbWallRayCastLeft" type="RayCast2D" parent="."]
-position = Vector2(-4, -2)
-target_position = Vector2(-10, 0)
+[node name="AreaLevel2Right" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(9, -24)
 
-[node name="ShortClimbAirRayCastLeft" type="RayCast2D" parent="."]
-position = Vector2(-4, -18)
-target_position = Vector2(-10, 0)
+[node name="AreaLevel2Left" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(-9, -24)
+
+[node name="AreaLevel3Right" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(9, -40)
+
+[node name="AreaLevel3Left" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(-9, -40)

@@ -14,10 +14,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var coyote_ray_cast_right = $CoyoteRayCastRight
 @onready var coyote_ray_cast_left = $CoyoteRayCastLeft
 @onready var jump_save_ray_cast = $JumpSaveRayCast
-@onready var short_climb_wall_ray_cast_right = $ShortClimbWallRayCastRight
-@onready var short_climb_wall_ray_cast_left = $ShortClimbWallRayCastLeft
-@onready var short_climb_air_ray_cast_right = $ShortClimbAirRayCastRight
-@onready var short_climb_air_ray_cast_left = $ShortClimbAirRayCastLeft
+@onready var area_level_1_right = $AreaLevel1Right
+@onready var area_level_1_left = $AreaLevel1Left
+@onready var area_level_2_right = $AreaLevel2Right
+@onready var area_level_2_left = $AreaLevel2Left
+@onready var area_level_3_right = $AreaLevel3Right
+@onready var area_level_3_left = $AreaLevel3Left
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -52,10 +54,10 @@ func _physics_process(delta):
 			
 		# Handle short climb
 		if Input.is_action_just_pressed("climb"):
-			if short_climb_wall_ray_cast_right.is_colliding() and !short_climb_air_ray_cast_right.is_colliding() and direction >= 0:
+			if area_level_1_right.isColliding and !area_level_2_right.isColliding and direction >= 0:
 				position.y += -16
 				position.x += 8
-			elif short_climb_wall_ray_cast_left.is_colliding() and !short_climb_air_ray_cast_left.is_colliding() and direction <= 0:
+			elif area_level_1_left.isColliding and !area_level_2_left.isColliding and direction <= 0:
 				position.y += -16
 				position.x += -8
 			
