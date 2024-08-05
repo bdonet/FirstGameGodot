@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cgjcqvcupt4hb" path="res://Assets/sprites/climb_detector.png" id="2_ef5xm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gp1h2"]
-size = Vector2(10, 14)
+size = Vector2(10, 12)
 
 [node name="CollisionArea" type="Area2D"]
 collision_layer = 0
@@ -15,6 +15,7 @@ shape = SubResource("RectangleShape2D_gp1h2")
 
 [node name="CollisionDisplay" type="Sprite2D" parent="."]
 position = Vector2(-1.78814e-07, 0)
+scale = Vector2(1, 0.857143)
 texture = ExtResource("2_ef5xm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
