@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -190.0
 
 var isDead = false
 var jumpSaved = false
+var climbSaved = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -53,19 +54,32 @@ func _physics_process(delta):
 			jumpSaved = true
 			
 		# Handle short climb
-		if Input.is_action_just_pressed("climb"):
-			if area_level_1_right.isColliding and !area_level_2_right.isColliding and animated_sprite.flip_h == false:
+		if Input.is_action_just_pressed("climb") or climbSaved:
+			var climbType = GetClimbType()
+			if climbType == ClimbType.RightLow:
 				position.y += -16
 				position.x += 8
-			elif area_level_1_left.isColliding and !area_level_2_left.isColliding and animated_sprite.flip_h == true:
+				climbSaved = false
+			elif climbType == ClimbType.LeftLow:
 				position.y += -16
 				position.x += -8
-			if area_level_2_right.isColliding and !area_level_3_right.isColliding and animated_sprite.flip_h == false:
+				climbSaved = false
+			elif climbType == ClimbType.RightHigh:
 				position.y += -32
 				position.x += 8
-			elif area_level_2_left.isColliding and !area_level_3_left.isColliding and animated_sprite.flip_h == true:
+				climbSaved = false
+			elif climbType == ClimbType.LeftHigh:
 				position.y += -32
 				position.x += -8
+				climbSaved = false
+				
+		# Handle climb just before valid climbing
+		if Input.is_action_just_pressed("climb") and !is_on_floor() and GetClimbType() == ClimbType.None:
+			climbSaved = true
+		
+		# Reset climb saving when on ground
+		if is_on_floor():
+			climbSaved = false;
 			
 		# Flip the sprite to face the current direction
 		if direction > 0:
@@ -81,3 +95,23 @@ func _physics_process(delta):
 
 	# Apply the movement to the player
 	move_and_slide()
+	
+enum ClimbType {
+	None,
+	RightLow,
+	LeftLow,
+	RightHigh,
+	LeftHigh
+}
+	
+func GetClimbType():
+	if area_level_1_right.isColliding and !area_level_2_right.isColliding and animated_sprite.flip_h == false:
+		return ClimbType.RightLow
+	elif area_level_1_left.isColliding and !area_level_2_left.isColliding and animated_sprite.flip_h == true:
+		return ClimbType.LeftLow
+	if area_level_2_right.isColliding and !area_level_3_right.isColliding and animated_sprite.flip_h == false:
+		return ClimbType.RightHigh
+	elif area_level_2_left.isColliding and !area_level_3_left.isColliding and animated_sprite.flip_h == true:
+		return ClimbType.LeftHigh
+		
+	return ClimbType.None
