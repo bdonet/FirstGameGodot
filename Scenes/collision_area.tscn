@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqvcnfqi5hyfn"]
+[gd_scene load_steps=4 format=3 uid="uid://cqvcnfqi5hyfn"]
 
 [ext_resource type="Script" path="res://Scripts/AreaLevel1Right.gd" id="1_v0fvf"]
+[ext_resource type="Texture2D" uid="uid://cgjcqvcupt4hb" path="res://Assets/sprites/climb_detector.png" id="2_ef5xm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gp1h2"]
 size = Vector2(10, 14)
@@ -11,6 +12,10 @@ script = ExtResource("1_v0fvf")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_gp1h2")
+
+[node name="CollisionDisplay" type="Sprite2D" parent="."]
+position = Vector2(-1.78814e-07, 0)
+texture = ExtResource("2_ef5xm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
