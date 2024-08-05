@@ -54,16 +54,16 @@ func _physics_process(delta):
 			
 		# Handle short climb
 		if Input.is_action_just_pressed("climb"):
-			if area_level_1_right.isColliding and !area_level_2_right.isColliding and direction >= 0:
+			if area_level_1_right.isColliding and !area_level_2_right.isColliding and animated_sprite.flip_h == false:
 				position.y += -16
 				position.x += 8
-			elif area_level_1_left.isColliding and !area_level_2_left.isColliding and direction <= 0:
+			elif area_level_1_left.isColliding and !area_level_2_left.isColliding and animated_sprite.flip_h == true:
 				position.y += -16
 				position.x += -8
-			if area_level_1_right.isColliding and area_level_2_right.isColliding and !area_level_3_right.isColliding and direction >= 0:
+			if area_level_1_right.isColliding and area_level_2_right.isColliding and !area_level_3_right.isColliding and animated_sprite.flip_h == false:
 				position.y += -32
 				position.x += 8
-			elif area_level_1_left.isColliding and area_level_2_left.isColliding and !area_level_3_left.isColliding and direction <= 0:
+			elif area_level_1_left.isColliding and area_level_2_left.isColliding and !area_level_3_left.isColliding and animated_sprite.flip_h == true:
 				position.y += -32
 				position.x += -8
 			
