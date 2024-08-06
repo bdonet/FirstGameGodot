@@ -6,7 +6,7 @@ const JUMP_VELOCITY = -190.0
 
 var isDead = false
 var jumpSaved = false
-var climbSaved = false
+var climbSaved = ClimbType.None
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -21,6 +21,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var area_level_2_left = $AreaLevel2Left
 @onready var area_level_3_right = $AreaLevel3Right
 @onready var area_level_3_left = $AreaLevel3Left
+@onready var area_level_1_right_save = $AreaLevel1RightSave
+@onready var area_level_1_left_save = $AreaLevel1LeftSave
+@onready var area_level_2_right_save = $AreaLevel2RightSave
+@onready var area_level_2_left_save = $AreaLevel2LeftSave
+@onready var area_level_3_right_save = $AreaLevel3RightSave
+@onready var area_level_3_left_save = $AreaLevel3LeftSave
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -54,32 +60,32 @@ func _physics_process(delta):
 			jumpSaved = true
 			
 		# Handle short climb
-		if Input.is_action_just_pressed("climb") or climbSaved:
+		if Input.is_action_just_pressed("climb") or climbSaved == ClimbType.SaveRight or climbSaved == ClimbType.SaveLeft:
 			var climbType = GetClimbType()
 			if climbType == ClimbType.RightLow:
 				position.y += -16
 				position.x += 8
-				climbSaved = false
+				climbSaved = ClimbType.None
 			elif climbType == ClimbType.LeftLow:
 				position.y += -16
 				position.x += -8
-				climbSaved = false
+				climbSaved = ClimbType.None
 			elif climbType == ClimbType.RightHigh:
 				position.y += -32
 				position.x += 8
-				climbSaved = false
+				climbSaved = ClimbType.None
 			elif climbType == ClimbType.LeftHigh:
 				position.y += -32
 				position.x += -8
-				climbSaved = false
+				climbSaved = ClimbType.None
 				
 		# Handle climb just before valid climbing
-		if Input.is_action_just_pressed("climb") and !is_on_floor() and GetClimbType() == ClimbType.None:
-			climbSaved = true
+		if Input.is_action_just_pressed("climb") and !is_on_floor() and (GetClimbType() == ClimbType.SaveRight or GetClimbType() == ClimbType.SaveLeft):
+			climbSaved = GetClimbType()
 		
 		# Reset climb saving when on ground
 		if is_on_floor():
-			climbSaved = false;
+			climbSaved = ClimbType.None
 			
 		# Flip the sprite to face the current direction
 		if direction > 0:
@@ -101,7 +107,9 @@ enum ClimbType {
 	RightLow,
 	LeftLow,
 	RightHigh,
-	LeftHigh
+	LeftHigh,
+	SaveRight,
+	SaveLeft
 }
 	
 func GetClimbType():
@@ -109,9 +117,13 @@ func GetClimbType():
 		return ClimbType.RightLow
 	elif area_level_1_left.isColliding and !area_level_2_left.isColliding and animated_sprite.flip_h == true:
 		return ClimbType.LeftLow
-	if area_level_2_right.isColliding and !area_level_3_right.isColliding and animated_sprite.flip_h == false:
+	elif area_level_2_right.isColliding and !area_level_3_right.isColliding and animated_sprite.flip_h == false:
 		return ClimbType.RightHigh
 	elif area_level_2_left.isColliding and !area_level_3_left.isColliding and animated_sprite.flip_h == true:
 		return ClimbType.LeftHigh
+	elif area_level_1_right_save.isColliding or area_level_2_right_save.isColliding or area_level_3_right_save.isColliding:
+		return ClimbType.SaveRight
+	elif area_level_1_left_save.isColliding or area_level_2_left_save.isColliding or area_level_3_left_save.isColliding:
+		return ClimbType.SaveLeft
 		
 	return ClimbType.None

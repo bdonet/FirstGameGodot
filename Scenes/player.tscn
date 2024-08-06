@@ -289,3 +289,21 @@ position = Vector2(9, -40)
 
 [node name="AreaLevel3Left" parent="." instance=ExtResource("3_u0ss2")]
 position = Vector2(-9, -40)
+
+[node name="AreaLevel1RightSave" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(14, -8)
+
+[node name="AreaLevel1LeftSave" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(-14, -8)
+
+[node name="AreaLevel2RightSave" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(14, -24)
+
+[node name="AreaLevel2LeftSave" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(-14, -24)
+
+[node name="AreaLevel3RightSave" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(14, -40)
+
+[node name="AreaLevel3LeftSave" parent="." instance=ExtResource("3_u0ss2")]
+position = Vector2(-14, -40)
