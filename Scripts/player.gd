@@ -61,8 +61,9 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("jump") and !is_on_floor() and jump_save_ray_cast.is_colliding() and velocity.y > 0:
 			jumpSaved = true
 			
-		# Handle short climb
-		if Input.is_action_just_pressed("climb") or climbSaved == ClimbType.SaveRight or climbSaved == ClimbType.SaveLeft:
+		# Handle climb
+		if Input.is_action_just_pressed("jump") or climbSaved == ClimbType.SaveRight or climbSaved == ClimbType.SaveLeft:
+			jumpSaved = false
 			var climbType = GetClimbType()
 			if climbType == ClimbType.RightLow:
 				velocity.y = LOW_CLIMB_VELOCITY
@@ -78,7 +79,7 @@ func _physics_process(delta):
 				climbSaved = ClimbType.None
 				
 		# Handle climb just before valid climbing
-		if Input.is_action_just_pressed("climb") and !is_on_floor() and (GetClimbType() == ClimbType.SaveRight or GetClimbType() == ClimbType.SaveLeft):
+		if Input.is_action_just_pressed("jump") and !is_on_floor() and (GetClimbType() == ClimbType.SaveRight or GetClimbType() == ClimbType.SaveLeft):
 			climbSaved = GetClimbType()
 		
 		# Reset climb saving when on ground
