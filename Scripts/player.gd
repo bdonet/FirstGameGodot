@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 const SPEED = 130.0
 const JUMP_VELOCITY = -190.0
+const LOW_CLIMB_VELOCITY = -230.0
+const HIGH_CLIMB_VELOCITY = -320.0
 
 var isDead = false
 var jumpSaved = false
@@ -63,20 +65,16 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("climb") or climbSaved == ClimbType.SaveRight or climbSaved == ClimbType.SaveLeft:
 			var climbType = GetClimbType()
 			if climbType == ClimbType.RightLow:
-				position.y += -16
-				position.x += 8
+				velocity.y = LOW_CLIMB_VELOCITY
 				climbSaved = ClimbType.None
 			elif climbType == ClimbType.LeftLow:
-				position.y += -16
-				position.x += -8
+				velocity.y = LOW_CLIMB_VELOCITY
 				climbSaved = ClimbType.None
 			elif climbType == ClimbType.RightHigh:
-				position.y += -32
-				position.x += 8
+				velocity.y = HIGH_CLIMB_VELOCITY
 				climbSaved = ClimbType.None
 			elif climbType == ClimbType.LeftHigh:
-				position.y += -32
-				position.x += -8
+				velocity.y = HIGH_CLIMB_VELOCITY
 				climbSaved = ClimbType.None
 				
 		# Handle climb just before valid climbing
