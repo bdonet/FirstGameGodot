@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dxwujsxboubra"]
+[gd_scene load_steps=25 format=3 uid="uid://dxwujsxboubra"]
 
 [ext_resource type="PackedScene" uid="uid://y5wafvwwae4l" path="res://Scenes/player.tscn" id="1_icq0n"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_svglu"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dulee83hm76jb" path="res://Assets/fonts/PixelOperator8.ttf" id="7_e6ip5"]
 [ext_resource type="Texture2D" uid="uid://chr85mtr8t2r1" path="res://Assets/sprites/coin.png" id="10_6cpro"]
 [ext_resource type="PackedScene" uid="uid://3y0sdxm4kjed" path="res://Scenes/advancedslime.tscn" id="10_tt0nk"]
+[ext_resource type="Texture2D" uid="uid://bll7ilow4xep4" path="res://Assets/sprites/fruit.png" id="11_0hrdx"]
 [ext_resource type="PackedScene" uid="uid://bw27f1m6md03x" path="res://Scenes/apple.tscn" id="11_hat3c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssm71"]
@@ -825,7 +826,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer/MarginContainer"]
-custom_minimum_size = Vector2(85, 1)
+custom_minimum_size = Vector2(85, 30)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -835,13 +836,24 @@ theme_override_font_sizes/font_size = 32
 text = "x20"
 autowrap_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/MarginContainer"]
+[node name="CoinImage" type="Sprite2D" parent="CanvasLayer/MarginContainer"]
 position = Vector2(-20, 24)
 scale = Vector2(3.46875, 3.46875)
 texture = ExtResource("10_6cpro")
 hframes = 12
 
+[node name="AppleImage" type="Sprite2D" parent="CanvasLayer/MarginContainer"]
+visible = false
+position = Vector2(95, 0)
+scale = Vector2(2.96094, 2.96094)
+texture = ExtResource("11_0hrdx")
+offset = Vector2(-10, 22)
+hframes = 4
+vframes = 4
+frame = 12
+
 [node name="Apple" parent="." instance=ExtResource("11_hat3c")]
 position = Vector2(2488, 126)
 
 [connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
+[connection signal="pickup" from="Apple" to="GameManager" method="_on_apple_pickup"]
