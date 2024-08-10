@@ -1,7 +1,7 @@
 extends Node
 
 var score = 0
-@onready var score_label = $"../CanvasLayer/ScoreLabel"
+@onready var score_label = $"../CanvasLayer/MarginContainer/ScoreLabel"
 @onready var coins = $"../Coins"
 @onready var maxScore = coins.get_child_count()
 
