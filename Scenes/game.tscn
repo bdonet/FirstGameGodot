@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dxwujsxboubra"]
+[gd_scene load_steps=22 format=3 uid="uid://dxwujsxboubra"]
 
 [ext_resource type="PackedScene" uid="uid://y5wafvwwae4l" path="res://Scenes/player.tscn" id="1_icq0n"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_svglu"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dbglhjvtg1lyp" path="res://Scenes/killzone.tscn" id="5_d7e8p"]
 [ext_resource type="PackedScene" uid="uid://ds0yvidhjewdb" path="res://Scenes/slime.tscn" id="6_ncu74"]
 [ext_resource type="FontFile" uid="uid://dulee83hm76jb" path="res://Assets/fonts/PixelOperator8.ttf" id="7_e6ip5"]
-[ext_resource type="FontFile" uid="uid://bjwi0w48avk4g" path="res://Assets/fonts/PixelOperator8-Bold.ttf" id="9_iugmi"]
 [ext_resource type="PackedScene" uid="uid://3y0sdxm4kjed" path="res://Scenes/advancedslime.tscn" id="10_tt0nk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssm71"]
@@ -536,19 +535,6 @@ _data = {
 unique_name_in_owner = true
 script = ExtResource("1_svglu")
 
-[node name="ScoreLabel" type="Label" parent="GameManager"]
-offset_left = 431.0
-offset_top = -492.0
-offset_right = 584.0
-offset_bottom = -473.0
-theme_override_colors/font_color = Color(0.0784314, 0.596078, 0.862745, 1)
-theme_override_fonts/font = ExtResource("9_iugmi")
-theme_override_font_sizes/font_size = 8
-text = "Coins:
-x/21"
-horizontal_alignment = 1
-autowrap_mode = 2
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_n1sun")
 format = 2
@@ -588,10 +574,13 @@ position = Vector2(584, -7)
 position = Vector2(808, -22)
 
 [node name="Coin24" parent="Coins" instance=ExtResource("4_74yda")]
-position = Vector2(856, 9)
+position = Vector2(857, 11)
 
 [node name="Coin25" parent="Coins" instance=ExtResource("4_74yda")]
 position = Vector2(1000, 90)
+
+[node name="Coin27" parent="Coins" instance=ExtResource("4_74yda")]
+position = Vector2(1016, 90)
 
 [node name="Coin28" parent="Coins" instance=ExtResource("4_74yda")]
 position = Vector2(1224, 90)
@@ -820,3 +809,21 @@ horizontal_alignment = 1
 
 [node name="AdvancedSlime" parent="." instance=ExtResource("10_tt0nk")]
 position = Vector2(968, 90)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -197.0
+offset_bottom = 88.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 32
+text = "Coins"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
