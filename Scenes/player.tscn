@@ -1,8 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://y5wafvwwae4l"]
+[gd_scene load_steps=34 format=3 uid="uid://y5wafvwwae4l"]
 
 [ext_resource type="Texture2D" uid="uid://ch3chr00827ip" path="res://Assets/sprites/knight.png" id="1_bgorp"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_i7ida"]
+[ext_resource type="Texture2D" uid="uid://du8amwy7j36ng" path="res://Assets/sprites/climb_indicator.png" id="2_s5dpf"]
 [ext_resource type="PackedScene" uid="uid://cqvcnfqi5hyfn" path="res://Scenes/collision_area.tscn" id="3_u0ss2"]
+[ext_resource type="Script" path="res://Scripts/climbindicator.gd" id="3_vu63m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2fs3s"]
 atlas = ExtResource("1_bgorp")
@@ -250,6 +252,11 @@ z_index = 5
 collision_layer = 2
 script = ExtResource("1_i7ida")
 
+[node name="ClimbIndicator" type="Sprite2D" parent="."]
+position = Vector2(0, -18)
+texture = ExtResource("2_s5dpf")
+script = ExtResource("3_vu63m")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_m20om")
@@ -307,3 +314,5 @@ position = Vector2(13, -40)
 
 [node name="AreaLevel3LeftSave" parent="." instance=ExtResource("3_u0ss2")]
 position = Vector2(-13, -40)
+
+[connection signal="ready" from="ClimbIndicator" to="ClimbIndicator" method="_on_ready"]

@@ -29,6 +29,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var area_level_2_left_save = $AreaLevel2LeftSave
 @onready var area_level_3_right_save = $AreaLevel3RightSave
 @onready var area_level_3_left_save = $AreaLevel3LeftSave
+@onready var climb_indicator = $ClimbIndicator
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -91,6 +92,17 @@ func _physics_process(delta):
 			animated_sprite.flip_h = false
 		elif direction < 0:
 			animated_sprite.flip_h = true
+			
+		# Display an indicator if a climb is possible
+		var currentClimbType = GetClimbType()
+		if (currentClimbType == ClimbType.None or currentClimbType == ClimbType.SaveRight or currentClimbType == ClimbType.SaveLeft):
+			climb_indicator.visible = false
+		else:
+			climb_indicator.visible = true
+			if (currentClimbType == ClimbType.RightLow or currentClimbType == ClimbType.RightHigh):
+				climb_indicator.offset = Vector2(6, 0)
+			else:
+				climb_indicator.offset = Vector2(-6, 0)
 		
 		# Move the player
 		if direction:
