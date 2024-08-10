@@ -15,4 +15,4 @@ func _on_ready():
 
 
 func setScoreLabelText():
-	score_label.text = "Coins:\n" + str(score) + "/" + str(maxScore)
+	score_label.text = "x" + str(score)

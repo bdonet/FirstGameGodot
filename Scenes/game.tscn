@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dxwujsxboubra"]
+[gd_scene load_steps=23 format=3 uid="uid://dxwujsxboubra"]
 
 [ext_resource type="PackedScene" uid="uid://y5wafvwwae4l" path="res://Scenes/player.tscn" id="1_icq0n"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_svglu"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dbglhjvtg1lyp" path="res://Scenes/killzone.tscn" id="5_d7e8p"]
 [ext_resource type="PackedScene" uid="uid://ds0yvidhjewdb" path="res://Scenes/slime.tscn" id="6_ncu74"]
 [ext_resource type="FontFile" uid="uid://dulee83hm76jb" path="res://Assets/fonts/PixelOperator8.ttf" id="7_e6ip5"]
+[ext_resource type="Texture2D" uid="uid://chr85mtr8t2r1" path="res://Assets/sprites/coin.png" id="10_6cpro"]
 [ext_resource type="PackedScene" uid="uid://3y0sdxm4kjed" path="res://Scenes/advancedslime.tscn" id="10_tt0nk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssm71"]
@@ -816,24 +817,27 @@ position = Vector2(1992, 185)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -11.0
-offset_bottom = 42.0
+offset_left = -85.0
+offset_bottom = 40.0
 grow_horizontal = 0
-size_flags_horizontal = 8
-size_flags_vertical = 0
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer/MarginContainer"]
-custom_minimum_size = Vector2(1, 1)
+custom_minimum_size = Vector2(85, 1)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("7_e6ip5")
 theme_override_font_sizes/font_size = 32
-text = "Coins"
-horizontal_alignment = 2
+text = "x20"
 autowrap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/MarginContainer"]
+position = Vector2(-20, 24)
+scale = Vector2(3.46875, 3.46875)
+texture = ExtResource("10_6cpro")
+hframes = 12
 
 [connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
