@@ -801,11 +801,23 @@ text = "Baddies want to hurt you"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Label5" type="Label" parent="Labels"]
+[node name="ScoreSummary" type="Label" parent="Labels"]
 offset_left = 441.0
 offset_top = -551.0
 offset_right = 594.0
 offset_bottom = -536.0
+theme_override_colors/font_color = Color(0.0784314, 0.596078, 0.862745, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "Coins: x/20
+Apples: x/1"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="Labels"]
+offset_left = 441.0
+offset_top = -573.0
+offset_right = 594.0
+offset_bottom = -558.0
 theme_override_colors/font_color = Color(0.0784314, 0.596078, 0.862745, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
 theme_override_font_sizes/font_size = 8
