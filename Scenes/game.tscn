@@ -873,4 +873,3 @@ frame = 12
 position = Vector2(2488, 126)
 
 [connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
-[connection signal="pickup" from="Apple" to="GameManager" method="_on_apple_pickup"]

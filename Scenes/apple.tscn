@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bw27f1m6md03x"]
 
-[ext_resource type="Script" path="res://Scripts/coin.gd" id="1_ps6ll"]
+[ext_resource type="Script" path="res://Scripts/apple.gd" id="1_u0bbx"]
 [ext_resource type="Texture2D" uid="uid://bll7ilow4xep4" path="res://Assets/sprites/fruit.png" id="2_7ercm"]
 [ext_resource type="AudioStream" uid="uid://bg6mehvgcebbt" path="res://Assets/sounds/coin.wav" id="3_lfcwt"]
 
@@ -107,7 +107,7 @@ _data = {
 
 [node name="Apple" type="Area2D"]
 collision_mask = 2
-script = ExtResource("1_ps6ll")
+script = ExtResource("1_u0bbx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_7ercm")
