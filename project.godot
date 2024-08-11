@@ -46,6 +46,12 @@ climb={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Map"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemies"
+
 [physics]
 
 2d/default_gravity=1500.0
