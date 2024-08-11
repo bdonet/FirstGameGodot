@@ -23,3 +23,7 @@ func setScoreLabelText():
 func _on_apple_pickup():
 	hasApple = true
 	apple_image.visible = true
+
+
+func _on_coins_pickup():
+	add_point()

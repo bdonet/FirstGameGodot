@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://dxwujsxboubra"]
+[gd_scene load_steps=26 format=3 uid="uid://dxwujsxboubra"]
 
 [ext_resource type="PackedScene" uid="uid://y5wafvwwae4l" path="res://Scenes/player.tscn" id="1_icq0n"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_svglu"]
 [ext_resource type="Texture2D" uid="uid://b8xup30obiljd" path="res://Assets/sprites/world_tileset.png" id="2_276ng"]
 [ext_resource type="PackedScene" uid="uid://bhuha41dp5xpw" path="res://Scenes/platform.tscn" id="3_6kgq8"]
 [ext_resource type="PackedScene" uid="uid://b4lvrkie6o6px" path="res://Scenes/coin.tscn" id="4_74yda"]
+[ext_resource type="Script" path="res://Scripts/Coins.gd" id="5_6co5i"]
 [ext_resource type="PackedScene" uid="uid://dbglhjvtg1lyp" path="res://Scenes/killzone.tscn" id="5_d7e8p"]
 [ext_resource type="PackedScene" uid="uid://ds0yvidhjewdb" path="res://Scenes/slime.tscn" id="6_ncu74"]
 [ext_resource type="FontFile" uid="uid://dulee83hm76jb" path="res://Assets/fonts/PixelOperator8.ttf" id="7_e6ip5"]
@@ -563,6 +564,7 @@ position = Vector2(985, 310)
 shape = SubResource("WorldBoundaryShape2D_w0un6")
 
 [node name="Coins" type="Node" parent="."]
+script = ExtResource("5_6co5i")
 
 [node name="Coin2" parent="Coins" instance=ExtResource("4_74yda")]
 position = Vector2(280, -9)
@@ -873,3 +875,6 @@ frame = 12
 position = Vector2(2488, 126)
 
 [connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
+[connection signal="pickup" from="Coins" to="GameManager" method="_on_coins_pickup"]
+[connection signal="ready" from="Coins" to="Coins" method="_on_ready"]
+[connection signal="pickup" from="Apple" to="GameManager" method="_on_apple_pickup"]
