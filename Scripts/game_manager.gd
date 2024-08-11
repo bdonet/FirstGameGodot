@@ -5,7 +5,7 @@ var hasApple = false
 @onready var score_label = $"../CanvasLayer/MarginContainer/ScoreLabel"
 @onready var coins = $"../Coins"
 @onready var maxScore = coins.get_child_count()
-@onready var apple_score = $"../CanvasLayer/MarginContainer/AppleImage"
+@onready var apple_image = $"../CanvasLayer/MarginContainer/ScoreLabel/AppleControl/AppleImage"
 
 func add_point():
 	score += 1
@@ -22,4 +22,4 @@ func setScoreLabelText():
 
 func _on_apple_pickup():
 	hasApple = true
-	apple_score.visible = true
+	apple_image.visible = true
