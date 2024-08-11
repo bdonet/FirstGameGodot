@@ -25,6 +25,7 @@ func setScoreLabelText():
 func _on_apple_pickup():
 	apples += 1
 	apple_image.visible = true
+	setScoreLabelText()
 
 
 func _on_coins_pickup():
