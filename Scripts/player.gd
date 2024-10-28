@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const SPEED = 130.0
 const JUMP_VELOCITY = -190.0
 const LOW_CLIMB_VELOCITY = -230.0
@@ -9,6 +8,8 @@ const HIGH_CLIMB_VELOCITY = -320.0
 var isDead = false
 var jumpSaved = false
 var climbSaved = ClimbType.None
+var startX
+var startY
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -30,6 +31,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var area_level_3_right_save = $AreaLevel3RightSave
 @onready var area_level_3_left_save = $AreaLevel3LeftSave
 @onready var climb_indicator = $ClimbIndicator
+
+# Save the starting position so we know where to reset to on death	
+func _on_ready():
+	startX = position.x
+	startY = position.y
 
 func _physics_process(delta):
 	# Add the gravity.

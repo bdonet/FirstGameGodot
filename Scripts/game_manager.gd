@@ -41,4 +41,6 @@ func _on_player_died():
 
 func _on_death_timer_timeout():
 	Engine.time_scale = 1
-	get_tree().reload_current_scene()
+	player.position.x = player.startX
+	player.position.y = player.startY
+	player.isDead = false
