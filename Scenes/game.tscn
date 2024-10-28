@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dxwujsxboubra"]
+[gd_scene load_steps=28 format=3 uid="uid://dxwujsxboubra"]
 
 [ext_resource type="PackedScene" uid="uid://y5wafvwwae4l" path="res://Scenes/player.tscn" id="1_icq0n"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_svglu"]
@@ -420,6 +420,9 @@ sources/0 = SubResource("TileSetAtlasSource_ssm71")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w0un6"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5sage"]
+size = Vector2(1586.5, 225)
+
 [sub_resource type="Animation" id="Animation_d6w1f"]
 length = 0.001
 tracks/0/type = "value"
@@ -610,9 +613,13 @@ layer_1/tile_data = PackedInt32Array(1, 0, 0, 2, 0, 0, 3, 0, 1, -65533, 0, 0, -6
 [node name="WorldBottom" parent="." instance=ExtResource("5_d7e8p")]
 position = Vector2(168, 85)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBottom"]
+[node name="BottomBoundary" type="CollisionShape2D" parent="WorldBottom"]
 position = Vector2(985, 310)
 shape = SubResource("WorldBoundaryShape2D_w0un6")
+
+[node name="MainAreaExtension" type="CollisionShape2D" parent="WorldBottom"]
+position = Vector2(185.75, 185.5)
+shape = SubResource("RectangleShape2D_5sage")
 
 [node name="Player" parent="." instance=ExtResource("1_icq0n")]
 position = Vector2(-168, -35)
