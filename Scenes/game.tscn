@@ -897,14 +897,44 @@ theme_override_font_sizes/font_size = 8
 text = "Top of the world!"
 horizontal_alignment = 1
 
-[node name="Apple" parent="." instance=ExtResource("11_hat3c")]
-position = Vector2(2488, 126)
-
 [node name="Checkpoints" type="Node" parent="."]
 script = ExtResource("15_83y61")
 
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
-position = Vector2(72, -33)
+position = Vector2(88, -33)
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
+position = Vector2(568, -129)
+
+[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
+position = Vector2(642, -311)
+
+[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
+position = Vector2(104, -241)
+
+[node name="Checkpoint5" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
+position = Vector2(520, -497)
+
+[node name="Checkpoint6" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
+position = Vector2(1480, 95)
+
+[node name="Checkpoint7" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
+position = Vector2(2408, 143)
+
+[node name="Checkpoint8" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
+position = Vector2(280, -1)
+
+[node name="Checkpoint10" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
+position = Vector2(216, -113)
+
+[node name="Checkpoint12" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
+position = Vector2(1864, 95)
+
+[node name="Checkpoint13" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
+position = Vector2(2472, 143)
+
+[node name="Apple" parent="." instance=ExtResource("11_hat3c")]
+position = Vector2(2488, 126)
 
 [connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
 [connection signal="timeout" from="GameManager/DeathTimer" to="GameManager" method="_on_death_timer_timeout"]
@@ -913,6 +943,6 @@ position = Vector2(72, -33)
 [connection signal="ready" from="Coins" to="Coins" method="_on_ready"]
 [connection signal="player_died" from="Enemies" to="GameManager" method="_on_player_died"]
 [connection signal="ready" from="Enemies" to="Enemies" method="_on_ready"]
-[connection signal="pickup" from="Apple" to="GameManager" method="_on_apple_pickup"]
 [connection signal="checkpoint_reached" from="Checkpoints" to="GameManager" method="_on_checkpoint_reached"]
 [connection signal="ready" from="Checkpoints" to="Checkpoints" method="_on_ready"]
+[connection signal="pickup" from="Apple" to="GameManager" method="_on_apple_pickup"]
