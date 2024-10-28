@@ -624,7 +624,7 @@ position = Vector2(185.75, 185.5)
 shape = SubResource("RectangleShape2D_5sage")
 
 [node name="Player" parent="." instance=ExtResource("1_icq0n")]
-position = Vector2(-168, -35)
+position = Vector2(-168, -33)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
@@ -904,7 +904,7 @@ position = Vector2(2488, 126)
 script = ExtResource("15_83y61")
 
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
-position = Vector2(72, -44)
+position = Vector2(72, -33)
 
 [connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
 [connection signal="timeout" from="GameManager/DeathTimer" to="GameManager" method="_on_death_timer_timeout"]
