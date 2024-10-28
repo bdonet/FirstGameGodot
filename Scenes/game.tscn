@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://dxwujsxboubra"]
+[gd_scene load_steps=31 format=3 uid="uid://dxwujsxboubra"]
 
 [ext_resource type="PackedScene" uid="uid://y5wafvwwae4l" path="res://Scenes/player.tscn" id="1_icq0n"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_svglu"]
 [ext_resource type="Texture2D" uid="uid://b8xup30obiljd" path="res://Assets/sprites/world_tileset.png" id="2_276ng"]
 [ext_resource type="PackedScene" uid="uid://bhuha41dp5xpw" path="res://Scenes/platform.tscn" id="3_6kgq8"]
+[ext_resource type="Texture2D" uid="uid://dblnlg5f4n7w0" path="res://Assets/sprites/skull.png" id="4_6q5u0"]
 [ext_resource type="PackedScene" uid="uid://b4lvrkie6o6px" path="res://Scenes/coin.tscn" id="4_74yda"]
 [ext_resource type="Script" path="res://Scripts/Coins.gd" id="5_6co5i"]
 [ext_resource type="PackedScene" uid="uid://dbglhjvtg1lyp" path="res://Scenes/killzone.tscn" id="5_d7e8p"]
@@ -543,7 +544,7 @@ _data = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="RightScoreboard" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -553,7 +554,7 @@ grow_horizontal = 0
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer/MarginContainer"]
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/RightScoreboard"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -563,19 +564,19 @@ theme_override_font_sizes/font_size = 32
 text = "x0"
 horizontal_alignment = 2
 
-[node name="CoinControl" type="Control" parent="CanvasLayer/MarginContainer/ScoreLabel"]
+[node name="CoinControl" type="Control" parent="CanvasLayer/RightScoreboard/ScoreLabel"]
 layout_mode = 2
 anchors_preset = 0
 offset_right = 56.0
 offset_bottom = 32.0
 
-[node name="CoinImage" type="Sprite2D" parent="CanvasLayer/MarginContainer/ScoreLabel/CoinControl"]
+[node name="CoinImage" type="Sprite2D" parent="CanvasLayer/RightScoreboard/ScoreLabel/CoinControl"]
 scale = Vector2(3.46875, 3.46875)
 texture = ExtResource("10_6cpro")
 offset = Vector2(-6, 4)
 hframes = 12
 
-[node name="AppleControl" type="Control" parent="CanvasLayer/MarginContainer/ScoreLabel"]
+[node name="AppleControl" type="Control" parent="CanvasLayer/RightScoreboard/ScoreLabel"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -587,7 +588,7 @@ offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="AppleImage" type="Sprite2D" parent="CanvasLayer/MarginContainer/ScoreLabel/AppleControl"]
+[node name="AppleImage" type="Sprite2D" parent="CanvasLayer/RightScoreboard/ScoreLabel/AppleControl"]
 visible = false
 position = Vector2(39, 39)
 scale = Vector2(2.96094, 2.96094)
@@ -596,6 +597,26 @@ offset = Vector2(-6, 8)
 hframes = 4
 vframes = 4
 frame = 12
+
+[node name="LeftScoreboard" type="MarginContainer" parent="CanvasLayer"]
+offset_left = 40.0
+offset_top = 6.0
+offset_right = 96.0
+offset_bottom = 46.0
+
+[node name="DeathLabel" type="Label" parent="CanvasLayer/LeftScoreboard"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 32
+text = "x0"
+horizontal_alignment = 2
+
+[node name="DeathImage" type="Sprite2D" parent="CanvasLayer/LeftScoreboard/DeathLabel"]
+position = Vector2(-15, 17)
+scale = Vector2(2.24219, 2.24219)
+texture = ExtResource("4_6q5u0")
 
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
