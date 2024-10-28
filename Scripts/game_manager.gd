@@ -38,7 +38,7 @@ func _on_player_died():
 	Engine.time_scale = 0.5
 	player.isDead = true
 	death_timer.start()
-	apples -= 1
+	apples = 0
 	apple_scoreboard.visible = false
 	setScoreLabelText()
 	apple.reset()
