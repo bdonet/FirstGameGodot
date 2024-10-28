@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dxwujsxboubra"]
+[gd_scene load_steps=30 format=3 uid="uid://dxwujsxboubra"]
 
 [ext_resource type="PackedScene" uid="uid://y5wafvwwae4l" path="res://Scenes/player.tscn" id="1_icq0n"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_svglu"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://bll7ilow4xep4" path="res://Assets/sprites/fruit.png" id="11_0hrdx"]
 [ext_resource type="PackedScene" uid="uid://bw27f1m6md03x" path="res://Scenes/apple.tscn" id="11_hat3c"]
 [ext_resource type="Script" path="res://Scripts/enemies.gd" id="11_x6det"]
+[ext_resource type="Script" path="res://Scripts/checkpoints.gd" id="15_83y61"]
+[ext_resource type="PackedScene" uid="uid://n6d4wr624eiu" path="res://Scenes/checkpoint.tscn" id="15_bbtyw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ssm71"]
 texture = ExtResource("2_276ng")
@@ -898,6 +900,12 @@ horizontal_alignment = 1
 [node name="Apple" parent="." instance=ExtResource("11_hat3c")]
 position = Vector2(2488, 126)
 
+[node name="Checkpoints" type="Node" parent="."]
+script = ExtResource("15_83y61")
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
+position = Vector2(72, -44)
+
 [connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
 [connection signal="timeout" from="GameManager/DeathTimer" to="GameManager" method="_on_death_timer_timeout"]
 [connection signal="player_died" from="WorldBottom" to="GameManager" method="_on_player_died"]
@@ -906,3 +914,5 @@ position = Vector2(2488, 126)
 [connection signal="player_died" from="Enemies" to="GameManager" method="_on_player_died"]
 [connection signal="ready" from="Enemies" to="Enemies" method="_on_ready"]
 [connection signal="pickup" from="Apple" to="GameManager" method="_on_apple_pickup"]
+[connection signal="checkpoint_reached" from="Checkpoints" to="GameManager" method="_on_checkpoint_reached"]
+[connection signal="ready" from="Checkpoints" to="Checkpoints" method="_on_ready"]

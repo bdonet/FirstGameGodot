@@ -48,3 +48,8 @@ func _on_death_timer_timeout():
 	player.position.x = player.startX
 	player.position.y = player.startY
 	player.isDead = false
+
+func _on_checkpoint_reached():
+	player.startX = player.position.x
+	player.startY = player.position.y
+	print("Checkpoint saved")
