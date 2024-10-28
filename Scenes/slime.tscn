@@ -79,3 +79,5 @@ target_position = Vector2(2, 2)
 [node name="RayCastLedgeLeft" type="RayCast2D" parent="."]
 position = Vector2(-5, 6)
 target_position = Vector2(-2, 2)
+
+[connection signal="player_died" from="Killzone" to="." method="_on_killzone_player_died"]

@@ -4,13 +4,15 @@ const SPEED = 50
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 var direction = 1
+
 @onready var ray_cast_wall_right = $RayCastWallRight
 @onready var ray_cast_wall_left = $RayCastWallLeft
 @onready var ray_cast_ledge_right = $RayCastLedgeRight
 @onready var ray_cast_ledge_left = $RayCastLedgeLeft
 @onready var animated_sprite = $AnimatedSprite2D
+
+signal player_died
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -33,3 +35,7 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	# position.x += direction * SPEED * delta
+
+
+func _on_killzone_player_died():
+	player_died.emit()
