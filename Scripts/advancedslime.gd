@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const ATTACK_SPEED = 125
+const ATTACK_SPEED = 112
 const PATROL_SPEED = 50
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
