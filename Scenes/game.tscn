@@ -1032,6 +1032,74 @@ Take it back to the Top of the World"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="CreditLabels" type="Node" parent="Labels"]
+
+[node name="Label9" type="Label" parent="Labels/CreditLabels"]
+offset_left = 617.0
+offset_top = -966.0
+offset_right = 750.0
+offset_bottom = -936.0
+theme_override_colors/font_color = Color(0.0784314, 0.596078, 0.862745, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "Hooray!
+You did it!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label10" type="Label" parent="Labels/CreditLabels"]
+offset_left = 370.0
+offset_top = -1438.0
+offset_right = 545.0
+offset_bottom = -1397.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "Based on
+\"How to make a Video Game - Godot Beginner Tutorial\" by Brackeys"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label11" type="Label" parent="Labels/CreditLabels"]
+offset_left = 645.0
+offset_top = -1706.0
+offset_right = 820.0
+offset_bottom = -1665.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "Assets taken from
+\"Brackeys' Platformer Bundle\"
+on itch.io"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MissedCoinsSummary" type="Label" parent="Labels/CreditLabels"]
+offset_left = 386.0
+offset_top = -2144.0
+offset_right = 561.0
+offset_bottom = -2103.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "Missed
+coins:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="GameTitle" type="Label" parent="Labels/CreditLabels"]
+offset_left = 518.0
+offset_top = -2323.0
+offset_right = 693.0
+offset_bottom = -2282.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "The Dragon Tower
+v0.1"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="Checkpoints" type="Node" parent="."]
 script = ExtResource("15_83y61")
 
