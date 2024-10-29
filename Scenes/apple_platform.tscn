@@ -52,7 +52,12 @@ script = ExtResource("3_1os3w")
 position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_gaxyv")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="UpperPlayerDetectionArea" to="UpperPlayerDetectionArea" method="_on_body_entered"]
 [connection signal="player_entered" from="UpperPlayerDetectionArea" to="." method="_on_upper_player_detection_area_player_entered"]
 [connection signal="body_entered" from="LowerPlayerDetectionArea" to="LowerPlayerDetectionArea" method="_on_body_entered"]
 [connection signal="player_entered" from="LowerPlayerDetectionArea" to="." method="_on_lower_player_detection_area_player_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

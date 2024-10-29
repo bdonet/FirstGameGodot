@@ -2,6 +2,8 @@ extends AnimatableBody2D
 
 signal player_boarded
 
+@onready var timer = $Timer
+
 var player_hit_upper = false
 
 # Called when the node enters the scene tree for the first time.
@@ -15,8 +17,13 @@ func _process(_delta):
 
 func _on_upper_player_detection_area_player_entered():
 	player_hit_upper = true
+	timer.start()
 
 
 func _on_lower_player_detection_area_player_entered():
 	if (player_hit_upper):
 		player_boarded.emit()
+
+
+func _on_timer_timeout():
+	player_hit_upper = false
