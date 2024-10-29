@@ -75,4 +75,5 @@ func _on_checkpoint_reached(checkpoint_position):
 
 
 func _on_apple_platform_player_boarded():
+	player.freeze()
 	apple_platform_animation_player.play("roll_credits")
