@@ -9,8 +9,7 @@ var is_dead = false
 var jumpSaved = false
 var climbSaved = ClimbType.None
 var can_move = true
-var startX
-var startY
+var start_position
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -35,8 +34,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 # Save the starting position so we know where to reset to on death	
 func _on_ready():
-	startX = position.x
-	startY = position.y
+	start_position = position
 
 func freeze():
 	can_move = false
@@ -49,8 +47,10 @@ func kill():
 func revive():
 	can_move = true
 	is_dead = false
-	position.x = startX
-	position.y = startY
+	position = start_position
+
+func save_checkpoint(checkpoint_position):
+	start_position = checkpoint_position
 
 func _physics_process(delta):
 	# Add the gravity.

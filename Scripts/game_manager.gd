@@ -67,8 +67,7 @@ func _on_checkpoint_reached(checkpoint_position):
 	if (apples > 0):
 		print("Checkpoint ignored")
 		return
-	player.startX = checkpoint_position.x
-	player.startY = checkpoint_position.y
+	player.save_checkpoint(checkpoint_position)
 	print("Checkpoint reached")
 
 
