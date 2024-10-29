@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Music="*res://Scenes/music.tscn"
 
+[display]
+
+window/size/mode=2
+
 [input]
 
 jump={
