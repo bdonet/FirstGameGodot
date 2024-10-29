@@ -46,7 +46,7 @@ func _on_player_died():
 	death_timer.start()
 	
 	print("You died!")
-	player.isDead = true
+	player.kill()
 	deaths += 1
 	setDeathLabelText()
 	
@@ -61,9 +61,7 @@ func _on_death_timer_timeout():
 	Engine.time_scale = 1
 	
 	# Reset player
-	player.position.x = player.startX
-	player.position.y = player.startY
-	player.isDead = false
+	player.revive()
 
 func _on_checkpoint_reached(checkpoint_position):
 	if (apples > 0):
