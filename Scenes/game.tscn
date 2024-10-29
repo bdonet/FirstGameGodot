@@ -1078,9 +1078,9 @@ autowrap_mode = 2
 
 [node name="MissedCoinsSummary" type="Label" parent="Labels/CreditLabels"]
 offset_left = 461.0
-offset_top = -2251.0
+offset_top = -2299.0
 offset_right = 522.0
-offset_bottom = -2210.0
+offset_bottom = -2258.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
 theme_override_font_sizes/font_size = 8
@@ -1144,6 +1144,7 @@ position = Vector2(2488, 119)
 [connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
 [connection signal="timeout" from="GameManager/DeathTimer" to="GameManager" method="_on_death_timer_timeout"]
 [connection signal="player_died" from="WorldBottom" to="GameManager" method="_on_player_died"]
+[connection signal="coin_names_built" from="Coins" to="GameManager" method="_on_coins_coin_names_built"]
 [connection signal="pickup" from="Coins" to="GameManager" method="_on_coins_pickup"]
 [connection signal="ready" from="Coins" to="Coins" method="_on_ready"]
 [connection signal="player_boarded" from="Platforms/ApplePlatform" to="GameManager" method="_on_apple_platform_player_boarded"]

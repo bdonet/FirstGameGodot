@@ -6,6 +6,6 @@ signal pickup
 
 
 func _on_body_entered(_body):
-	pickup.emit()
+	pickup.emit(name)
 	animation_player.play("pickup")
 	
