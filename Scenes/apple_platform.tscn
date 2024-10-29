@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://tr7nxs6sxhr"]
+[gd_scene load_steps=8 format=3 uid="uid://tr7nxs6sxhr"]
 
 [ext_resource type="Script" path="res://Scripts/apple_platform.gd" id="1_30s4w"]
 [ext_resource type="Texture2D" uid="uid://bg1fmqavyussy" path="res://Assets/sprites/platforms.png" id="1_msrb0"]
@@ -9,7 +9,10 @@
 size = Vector2(31, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iune3"]
-size = Vector2(22, 8)
+size = Vector2(22, 4.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gaxyv"]
+size = Vector2(22, 2)
 
 [node name="ApplePlatform" type="AnimatableBody2D"]
 script = ExtResource("1_30s4w")
@@ -31,14 +34,25 @@ frame = 12
 shape = SubResource("RectangleShape2D_dbtk8")
 one_way_collision = true
 
-[node name="PlayerDetectionArea" type="Area2D" parent="."]
+[node name="UpperPlayerDetectionArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("3_1os3w")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea"]
-position = Vector2(0, -19)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperPlayerDetectionArea"]
+position = Vector2(0, -17.5)
 shape = SubResource("RectangleShape2D_iune3")
 
-[connection signal="body_entered" from="PlayerDetectionArea" to="PlayerDetectionArea" method="_on_body_entered"]
-[connection signal="player_entered" from="PlayerDetectionArea" to="." method="_on_player_detection_area_player_entered"]
+[node name="LowerPlayerDetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_1os3w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerPlayerDetectionArea"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_gaxyv")
+
+[connection signal="body_entered" from="UpperPlayerDetectionArea" to="UpperPlayerDetectionArea" method="_on_body_entered"]
+[connection signal="player_entered" from="UpperPlayerDetectionArea" to="." method="_on_upper_player_detection_area_player_entered"]
+[connection signal="body_entered" from="LowerPlayerDetectionArea" to="LowerPlayerDetectionArea" method="_on_body_entered"]
+[connection signal="player_entered" from="LowerPlayerDetectionArea" to="." method="_on_lower_player_detection_area_player_entered"]
