@@ -12,7 +12,7 @@ size = Vector2(31, 8)
 size = Vector2(22, 4.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gaxyv"]
-size = Vector2(22, 2)
+size = Vector2(22, 1)
 
 [node name="ApplePlatform" type="AnimatableBody2D"]
 script = ExtResource("1_30s4w")
@@ -49,7 +49,7 @@ collision_mask = 2
 script = ExtResource("3_1os3w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LowerPlayerDetectionArea"]
-position = Vector2(0, -5)
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_gaxyv")
 
 [connection signal="body_entered" from="UpperPlayerDetectionArea" to="UpperPlayerDetectionArea" method="_on_body_entered"]
