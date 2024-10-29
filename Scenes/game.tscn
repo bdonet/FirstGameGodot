@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dxwujsxboubra"]
+[gd_scene load_steps=37 format=3 uid="uid://dxwujsxboubra"]
 
 [ext_resource type="PackedScene" uid="uid://y5wafvwwae4l" path="res://Scenes/player.tscn" id="1_icq0n"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_svglu"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://tr7nxs6sxhr" path="res://Scenes/apple_platform.tscn" id="12_unc4b"]
 [ext_resource type="Script" path="res://Scripts/checkpoints.gd" id="15_83y61"]
 [ext_resource type="PackedScene" uid="uid://n6d4wr624eiu" path="res://Scenes/checkpoint.tscn" id="15_bbtyw"]
+[ext_resource type="FontFile" uid="uid://bjwi0w48avk4g" path="res://Assets/fonts/PixelOperator8-Bold.ttf" id="16_ph7me"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_1fu6j"]
 tile_data = PackedInt32Array(0, 393216, 12, 196608, 393216, 12, 393216, 393216, 12, 589824, 393216, 12, 786432, 393216, 12, 3, 393216, 12, 196611, 393216, 12, 393219, 393216, 12, 589827, 393216, 12, 786435, 393216, 12, 6, 393216, 12, 196614, 393216, 12, 393222, 393216, 12, 589830, 393216, 12, 786438, 393216, 12, 9, 393216, 12, 196617, 393216, 12, 393225, 393216, 12, 589833, 393216, 12, 786441, 393216, 12, 12, 393216, 12, 196620, 393216, 12, 393228, 393216, 12, 589836, 393216, 12, 786444, 393216, 12, 15, 393216, 12, 196623, 393216, 12, 393231, 393216, 12, 589839, 393216, 12, 786447, 393216, 12)
@@ -563,6 +564,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_x0m7t"]
 resource_name = "roll_credits"
+length = 30.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -570,10 +572,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 30),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(593, -543), Vector2(717, -619)]
+"values": [Vector2(593, -543), Vector2(593, -2219)]
 }
 
 [sub_resource type="Animation" id="Animation_v3ywk"]
@@ -702,7 +704,7 @@ position = Vector2(185.75, 185.5)
 shape = SubResource("RectangleShape2D_5sage")
 
 [node name="Player" parent="." instance=ExtResource("1_icq0n")]
-position = Vector2(-167, -33)
+position = Vector2(-168, -33)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
@@ -1048,10 +1050,10 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Label10" type="Label" parent="Labels/CreditLabels"]
-offset_left = 370.0
+offset_left = 457.0
 offset_top = -1438.0
-offset_right = 545.0
-offset_bottom = -1397.0
+offset_right = 583.0
+offset_bottom = -1386.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
 theme_override_font_sizes/font_size = 8
@@ -1061,9 +1063,9 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Label11" type="Label" parent="Labels/CreditLabels"]
-offset_left = 645.0
+offset_left = 603.0
 offset_top = -1706.0
-offset_right = 820.0
+offset_right = 729.0
 offset_bottom = -1665.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
@@ -1075,10 +1077,10 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="MissedCoinsSummary" type="Label" parent="Labels/CreditLabels"]
-offset_left = 386.0
-offset_top = -2144.0
-offset_right = 561.0
-offset_bottom = -2103.0
+offset_left = 461.0
+offset_top = -2251.0
+offset_right = 522.0
+offset_bottom = -2210.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
 theme_override_font_sizes/font_size = 8
@@ -1088,12 +1090,12 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="GameTitle" type="Label" parent="Labels/CreditLabels"]
-offset_left = 518.0
-offset_top = -2323.0
-offset_right = 693.0
-offset_bottom = -2282.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("7_e6ip5")
+offset_left = 505.0
+offset_top = -2290.0
+offset_right = 680.0
+offset_bottom = -2267.0
+theme_override_colors/font_color = Color(0.601489, 0.422974, 0.773438, 1)
+theme_override_fonts/font = ExtResource("16_ph7me")
 theme_override_font_sizes/font_size = 8
 text = "The Dragon Tower
 v0.1"
@@ -1137,7 +1139,7 @@ position = Vector2(1864, 95)
 position = Vector2(2472, 143)
 
 [node name="Apple" parent="." instance=ExtResource("11_hat3c")]
-position = Vector2(2488, 126)
+position = Vector2(2488, 119)
 
 [connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
 [connection signal="timeout" from="GameManager/DeathTimer" to="GameManager" method="_on_death_timer_timeout"]
