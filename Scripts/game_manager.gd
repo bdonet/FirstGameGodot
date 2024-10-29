@@ -64,7 +64,7 @@ func _on_death_timer_timeout():
 	player.revive()
 
 func _on_checkpoint_reached(checkpoint_position):
-	if (apples > 0):
+	if apples > 0:
 		print("Checkpoint ignored")
 		return
 	player.save_checkpoint(checkpoint_position)
@@ -72,5 +72,6 @@ func _on_checkpoint_reached(checkpoint_position):
 
 
 func _on_apple_platform_player_boarded():
-	player.freeze()
-	apple_platform_animation_player.play("roll_credits")
+	if apples > 0:
+		player.freeze()
+		apple_platform_animation_player.play("roll_credits")
