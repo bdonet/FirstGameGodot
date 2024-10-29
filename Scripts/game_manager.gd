@@ -13,6 +13,7 @@ var deaths = 0
 @onready var player = $"../Player"
 @onready var apple = $"../Apple"
 @onready var death_label = $"../CanvasLayer/LeftScoreboard/DeathLabel"
+@onready var apple_platform_animation_player = $"../Platforms/ApplePlatform/AnimationPlayer"
 
 func add_point():
 	score += 1
@@ -71,3 +72,7 @@ func _on_checkpoint_reached(checkpoint_position):
 	player.startX = checkpoint_position.x
 	player.startY = checkpoint_position.y
 	print("Checkpoint reached")
+
+
+func _on_apple_platform_player_boarded():
+	apple_platform_animation_player.play("roll_credits")

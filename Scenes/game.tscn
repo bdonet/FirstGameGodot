@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dxwujsxboubra"]
+[gd_scene load_steps=35 format=3 uid="uid://dxwujsxboubra"]
 
 [ext_resource type="PackedScene" uid="uid://y5wafvwwae4l" path="res://Scenes/player.tscn" id="1_icq0n"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_svglu"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bll7ilow4xep4" path="res://Assets/sprites/fruit.png" id="11_0hrdx"]
 [ext_resource type="PackedScene" uid="uid://bw27f1m6md03x" path="res://Scenes/apple.tscn" id="11_hat3c"]
 [ext_resource type="Script" path="res://Scripts/enemies.gd" id="11_x6det"]
+[ext_resource type="PackedScene" uid="uid://tr7nxs6sxhr" path="res://Scenes/apple_platform.tscn" id="12_unc4b"]
 [ext_resource type="Script" path="res://Scripts/checkpoints.gd" id="15_83y61"]
 [ext_resource type="PackedScene" uid="uid://n6d4wr624eiu" path="res://Scenes/checkpoint.tscn" id="15_bbtyw"]
 
@@ -540,6 +541,42 @@ _data = {
 "move8": SubResource("Animation_xk34f")
 }
 
+[sub_resource type="Animation" id="Animation_x0m7t"]
+resource_name = "roll_credits"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(593, -543), Vector2(717, -619)]
+}
+
+[sub_resource type="Animation" id="Animation_v3ywk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(593, -543)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_th48p"]
+_data = {
+"RESET": SubResource("Animation_v3ywk"),
+"roll_credits": SubResource("Animation_x0m7t")
+}
+
 [node name="Game" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -645,7 +682,7 @@ position = Vector2(185.75, 185.5)
 shape = SubResource("RectangleShape2D_5sage")
 
 [node name="Player" parent="." instance=ExtResource("1_icq0n")]
-position = Vector2(-168, -33)
+position = Vector2(473.16, -507.188)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
@@ -835,6 +872,14 @@ libraries = {
 }
 autoplay = "move8"
 
+[node name="ApplePlatform" parent="Platforms" instance=ExtResource("12_unc4b")]
+position = Vector2(593, -543)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/ApplePlatform"]
+libraries = {
+"": SubResource("AnimationLibrary_th48p")
+}
+
 [node name="Enemies" type="Node" parent="."]
 script = ExtResource("11_x6det")
 
@@ -1011,6 +1056,7 @@ position = Vector2(2488, 126)
 [connection signal="player_died" from="WorldBottom" to="GameManager" method="_on_player_died"]
 [connection signal="pickup" from="Coins" to="GameManager" method="_on_coins_pickup"]
 [connection signal="ready" from="Coins" to="Coins" method="_on_ready"]
+[connection signal="player_boarded" from="Platforms/ApplePlatform" to="GameManager" method="_on_apple_platform_player_boarded"]
 [connection signal="player_died" from="Enemies" to="GameManager" method="_on_player_died"]
 [connection signal="ready" from="Enemies" to="Enemies" method="_on_ready"]
 [connection signal="checkpoint_reached" from="Checkpoints" to="GameManager" method="_on_checkpoint_reached"]
