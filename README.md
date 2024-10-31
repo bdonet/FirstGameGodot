@@ -5,4 +5,5 @@
     1. If the game does not run on your machine, open an [issue](https://github.com/bdonet/FirstGameGodot/issues). Please include your machine stats (OS version, CPU, and GPU) in the issue.
 4. Play the game to completion. The game title will be shown at the end.
 5. Stop your recordings and upload them somewhere you can share a link or two to them.
-6. Navigate to https://forms.office.com/r/LYm1BML4Wt and fill out the survey. Be sure to include links to your recording(s).
+6. Navigate to https://forms.office.com/r/btdpdgF7ub and input the link to your recording(s).
+7. Navigate to https://forms.office.com/r/LYm1BML4Wt and fill out the anonymous gameplay feedback survey.
