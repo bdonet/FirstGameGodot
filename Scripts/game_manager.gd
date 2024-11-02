@@ -57,12 +57,6 @@ func _on_player_died():
 	player.kill()
 	deaths += 1
 	setDeathLabelText()
-	
-	# Reset the apple if the player had it
-	apples = 0
-	apple_scoreboard.visible = false
-	setScoreLabelText()
-	apple.reset()
 
 func _on_death_timer_timeout():
 	# Make time move normally again
@@ -72,9 +66,6 @@ func _on_death_timer_timeout():
 	player.revive()
 
 func _on_checkpoint_reached(checkpoint_position):
-	if apples > 0:
-		print("Checkpoint ignored")
-		return
 	player.save_checkpoint(checkpoint_position)
 	print("Checkpoint reached")
 
