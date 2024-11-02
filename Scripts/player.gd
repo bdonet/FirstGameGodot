@@ -6,8 +6,8 @@ const LOW_CLIMB_VELOCITY = -230.0
 const HIGH_CLIMB_VELOCITY = -320.0
 
 var is_dead = false
-var jumpSaved = false
-var climbSaved = ClimbType.None
+var jump_saved = false
+var climb_saved = false
 var can_move = true
 var start_position
 
@@ -16,15 +16,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var coyote_ray_cast = $CoyoteRayCast
-@onready var jump_save_ray_cast = $JumpSaveRayCast
 @onready var area_level_1 = $AreaLevel1
 @onready var area_level_2 = $AreaLevel2
 @onready var area_level_3 = $AreaLevel3
-@onready var area_level_1_save = $AreaLevel1Save
-@onready var area_level_2_save = $AreaLevel2Save
-@onready var area_level_3_save = $AreaLevel3Save
-
 @onready var climb_indicator = $ClimbIndicator
+@onready var jump_save_timer = $JumpSaveTimer
+@onready var climb_save_timer = $ClimbSaveTimer
 
 # Save the starting position so we know where to reset to on death	
 func _on_ready():
@@ -76,33 +73,43 @@ func _physics_process(delta):
 				animated_sprite.play("run")
 		else:
 			animated_sprite.play("jump")
-				# Handle jump.
-		if (Input.is_action_just_pressed("jump") or jumpSaved) and (is_on_floor() or (coyote_ray_cast.is_colliding())):
+			
+		# Handle jump.
+		if (Input.is_action_just_pressed("jump") or jump_saved) and (is_on_floor() or (coyote_ray_cast.is_colliding())):
 			velocity.y = JUMP_VELOCITY
-			jumpSaved = false
+			print("Jumped")
+			jump_saved = false
+			climb_saved = false
 			
 		# Handle jump just before hitting ground
-		if Input.is_action_just_pressed("jump") and !is_on_floor() and jump_save_ray_cast.is_colliding() and velocity.y > 0:
-			jumpSaved = true
+		if Input.is_action_just_pressed("jump") and !is_on_floor() and velocity.y > 0:
+			jump_saved = true
+			print("jump saved")
+			jump_save_timer.start()
 			
 		# Handle climb
-		if Input.is_action_just_pressed("jump") or climbSaved == ClimbType.Save:
-			jumpSaved = false
+		if Input.is_action_just_pressed("jump") or climb_saved:
 			var climbType = GetClimbType()
 			if climbType == ClimbType.Low:
 				velocity.y = LOW_CLIMB_VELOCITY
-				climbSaved = ClimbType.None
+				climb_saved = false
+				jump_saved = false
+				print("Climbed low")
 			elif climbType == ClimbType.High:
 				velocity.y = HIGH_CLIMB_VELOCITY
-				climbSaved = ClimbType.None
+				climb_saved = false
+				jump_saved = false
+				print("Climbed high")
 				
 		# Handle climb just before valid climbing
-		if Input.is_action_just_pressed("jump") and !is_on_floor() and (GetClimbType() == ClimbType.Save):
-			climbSaved = GetClimbType()
+		if Input.is_action_just_pressed("jump") and !is_on_floor() and (GetClimbType() == ClimbType.None):
+			climb_saved = true
+			print("climb saved")
+			climb_save_timer.start()
 		
 		# Reset climb saving when on ground
 		if is_on_floor():
-			climbSaved = ClimbType.None
+			climb_saved = false
 			
 		# Flip the sprites and movement objects to face the current direction
 		if direction > 0:
@@ -112,9 +119,6 @@ func _physics_process(delta):
 			area_level_1.position.x = abs(area_level_1.position.x)
 			area_level_2.position.x = abs(area_level_2.position.x)
 			area_level_3.position.x = abs(area_level_3.position.x)
-			area_level_1_save.position.x = abs(area_level_1_save.position.x)
-			area_level_2_save.position.x = abs(area_level_2_save.position.x)
-			area_level_3_save.position.x = abs(area_level_3_save.position.x)
 		elif direction < 0:
 			animated_sprite.flip_h = true
 			climb_indicator.offset.x = -abs(climb_indicator.offset.x)		
@@ -122,13 +126,10 @@ func _physics_process(delta):
 			area_level_1.position.x = -abs(area_level_1.position.x)
 			area_level_2.position.x = -abs(area_level_2.position.x)
 			area_level_3.position.x = -abs(area_level_3.position.x)
-			area_level_1_save.position.x = -abs(area_level_1_save.position.x)
-			area_level_2_save.position.x = -abs(area_level_2_save.position.x)
-			area_level_3_save.position.x = -abs(area_level_3_save.position.x)
 			
 		# Display an indicator if a climb is possible
 		var currentClimbType = GetClimbType()
-		if (currentClimbType == ClimbType.None or currentClimbType == ClimbType.Save):
+		if (currentClimbType == ClimbType.None):
 			climb_indicator.visible = false
 		else:
 			climb_indicator.visible = true
@@ -145,8 +146,7 @@ func _physics_process(delta):
 enum ClimbType {
 	None,
 	Low,
-	High,
-	Save
+	High
 }
 	
 func GetClimbType():
@@ -154,7 +154,15 @@ func GetClimbType():
 		return ClimbType.Low
 	elif area_level_2.isColliding and !area_level_3.isColliding:
 		return ClimbType.High
-	elif area_level_1_save.isColliding or area_level_2_save.isColliding or area_level_3_save.isColliding:
-		return ClimbType.Save
 		
 	return ClimbType.None
+
+
+func _on_jump_save_timer_timeout():
+	jump_saved = false
+	print("Jump expired")
+
+
+func _on_climb_save_timer_timeout():
+	climb_saved = false
+	print("Climb expired")

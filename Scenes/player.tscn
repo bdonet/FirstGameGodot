@@ -273,10 +273,6 @@ shape = SubResource("CapsuleShape2D_ci2j7")
 position = Vector2(0, 1)
 target_position = Vector2(-13, 0)
 
-[node name="JumpSaveRayCast" type="RayCast2D" parent="."]
-position = Vector2(0, 1)
-target_position = Vector2(0, 14)
-
 [node name="AreaLevel1" parent="." instance=ExtResource("3_u0ss2")]
 position = Vector2(9, -8)
 
@@ -286,14 +282,15 @@ position = Vector2(9, -24)
 [node name="AreaLevel3" parent="." instance=ExtResource("3_u0ss2")]
 position = Vector2(9, -40)
 
-[node name="AreaLevel1Save" parent="." instance=ExtResource("3_u0ss2")]
-position = Vector2(13, -8)
+[node name="JumpSaveTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
 
-[node name="AreaLevel2Save" parent="." instance=ExtResource("3_u0ss2")]
-position = Vector2(13, -24)
-
-[node name="AreaLevel3Save" parent="." instance=ExtResource("3_u0ss2")]
-position = Vector2(13, -40)
+[node name="ClimbSaveTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="ready" from="ClimbIndicator" to="ClimbIndicator" method="_on_ready"]
+[connection signal="timeout" from="JumpSaveTimer" to="." method="_on_jump_save_timer_timeout"]
+[connection signal="timeout" from="ClimbSaveTimer" to="." method="_on_climb_save_timer_timeout"]
