@@ -3,7 +3,6 @@ extends Node
 var score = 0
 var apples = 0
 var deaths = 0
-var coin_names
 
 @onready var score_label = $"../CanvasLayer/RightScoreboard/ScoreLabel"
 @onready var coins = $"../Coins"
@@ -15,7 +14,6 @@ var coin_names
 @onready var apple = $"../Apple"
 @onready var death_label = $"../CanvasLayer/LeftScoreboard/DeathLabel"
 @onready var apple_platform_animation_player = $"../Platforms/ApplePlatform/AnimationPlayer"
-@onready var missed_coins_summary = $"../Labels/CreditLabels/MissedCoinsSummary"
 
 func add_point():
 	score += 1
@@ -33,20 +31,13 @@ func setScoreLabelText():
 func setDeathLabelText():
 	death_label.text = "x" + str(deaths)
 
-
-func setMissingCoinsLabelText():
-	missed_coins_summary.text = coin_names
-	print("Set missed coins text to ", coin_names)
-
 func _on_apple_pickup():
 	apples += 1
 	apple_scoreboard.visible = true
 	setScoreLabelText()
 
-func _on_coins_pickup(coin_name):
+func _on_coins_pickup():
 	add_point()
-	coin_names = coin_names.replace("\n" + coin_name + ",", "")
-	setMissingCoinsLabelText()
 
 func _on_player_died():
 	# Wait a bit for a death scene
@@ -74,8 +65,3 @@ func _on_apple_platform_player_boarded():
 	if apples > 0:
 		player.freeze()
 		apple_platform_animation_player.play("roll_credits")
-
-
-func _on_coins_coin_names_built(all_coin_names):
-	coin_names = all_coin_names
-	setMissingCoinsLabelText()

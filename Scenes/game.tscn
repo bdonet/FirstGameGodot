@@ -1232,9 +1232,9 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Label10" type="Label" parent="Labels/CreditLabels"]
-offset_left = 457.0
+offset_left = 421.0
 offset_top = -1438.0
-offset_right = 583.0
+offset_right = 547.0
 offset_bottom = -1386.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
@@ -1245,9 +1245,9 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Label11" type="Label" parent="Labels/CreditLabels"]
-offset_left = 603.0
+offset_left = 634.0
 offset_top = -1706.0
-offset_right = 729.0
+offset_right = 760.0
 offset_bottom = -1665.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
@@ -1255,19 +1255,6 @@ theme_override_font_sizes/font_size = 8
 text = "Assets taken from
 \"Brackeys' Platformer Bundle\"
 on itch.io"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="MissedCoinsSummary" type="Label" parent="Labels/CreditLabels"]
-offset_left = 461.0
-offset_top = -2299.0
-offset_right = 522.0
-offset_bottom = -2258.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("7_e6ip5")
-theme_override_font_sizes/font_size = 8
-text = "Missed
-coins:"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -1329,7 +1316,6 @@ position = Vector2(2328, 119)
 [connection signal="ready" from="GameManager" to="GameManager" method="_on_ready"]
 [connection signal="timeout" from="GameManager/DeathTimer" to="GameManager" method="_on_death_timer_timeout"]
 [connection signal="player_died" from="WorldBottom" to="GameManager" method="_on_player_died"]
-[connection signal="coin_names_built" from="Coins" to="GameManager" method="_on_coins_coin_names_built"]
 [connection signal="pickup" from="Coins" to="GameManager" method="_on_coins_pickup"]
 [connection signal="ready" from="Coins" to="Coins" method="_on_ready"]
 [connection signal="player_boarded" from="Platforms/ApplePlatform" to="GameManager" method="_on_apple_platform_player_boarded"]
