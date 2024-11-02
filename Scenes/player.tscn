@@ -270,7 +270,7 @@ shape = SubResource("CapsuleShape2D_ci2j7")
 
 [node name="CoyoteRayCastRight" type="RayCast2D" parent="."]
 position = Vector2(0, 1)
-target_position = Vector2(12, 0)
+target_position = Vector2(13, 0)
 
 [node name="CoyoteRayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, 1)
