@@ -88,7 +88,7 @@ func _physics_process(delta):
 			jump_save_timer.start()
 			
 		# Handle climb
-		if Input.is_action_just_pressed("jump") or climb_saved:
+		if Input.is_action_just_pressed("climb") or climb_saved:
 			var climbType = GetClimbType()
 			if climbType == ClimbType.Low:
 				velocity.y = LOW_CLIMB_VELOCITY
@@ -102,7 +102,7 @@ func _physics_process(delta):
 				print("Climbed high")
 				
 		# Handle climb just before valid climbing
-		if Input.is_action_just_pressed("jump") and !is_on_floor() and (GetClimbType() == ClimbType.None):
+		if Input.is_action_just_pressed("climb") and !is_on_floor() and (GetClimbType() == ClimbType.None):
 			climb_saved = true
 			print("climb saved")
 			climb_save_timer.start()
