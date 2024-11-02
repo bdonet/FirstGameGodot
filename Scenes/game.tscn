@@ -742,7 +742,7 @@ position = Vector2(185.75, 185.5)
 shape = SubResource("RectangleShape2D_5sage")
 
 [node name="Player" parent="." instance=ExtResource("1_icq0n")]
-position = Vector2(-168, -33)
+position = Vector2(2312, 143)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(4, 4)
@@ -1069,9 +1069,9 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Label8" type="Label" parent="Labels"]
-offset_left = 2297.0
+offset_left = 2262.0
 offset_top = 73.0
-offset_right = 2430.0
+offset_right = 2395.0
 offset_bottom = 103.0
 theme_override_colors/font_color = Color(0.0980392, 0.313726, 0.752941, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
