@@ -1266,8 +1266,7 @@ offset_bottom = -2267.0
 theme_override_colors/font_color = Color(0.601489, 0.422974, 0.773438, 1)
 theme_override_fonts/font = ExtResource("16_ph7me")
 theme_override_font_sizes/font_size = 8
-text = "The Dragon Tower
-v0.1"
+text = "The Dragon Tower"
 horizontal_alignment = 1
 autowrap_mode = 2
 
