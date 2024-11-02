@@ -256,6 +256,7 @@ script = ExtResource("1_i7ida")
 [node name="ClimbIndicator" type="Sprite2D" parent="."]
 position = Vector2(0, -18)
 texture = ExtResource("2_s5dpf")
+offset = Vector2(6, 0)
 script = ExtResource("3_vu63m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

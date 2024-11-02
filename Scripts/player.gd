@@ -129,9 +129,9 @@ func _physics_process(delta):
 		else:
 			climb_indicator.visible = true
 			if (currentClimbType == ClimbType.RightLow or currentClimbType == ClimbType.RightHigh):
-				climb_indicator.offset = Vector2(6, 0)
+				climb_indicator.offset.x = abs(climb_indicator.offset.x)
 			else:
-				climb_indicator.offset = Vector2(-6, 0)
+				climb_indicator.offset.x = -abs(climb_indicator.offset.x)
 		
 		# Move the player
 		if direction:
