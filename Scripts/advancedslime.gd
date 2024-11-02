@@ -8,12 +8,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction = 1
 var speed = 0
 
-@onready var ray_cast_wall_right = $RayCastWallRight
-@onready var ray_cast_wall_left = $RayCastWallLeft
-@onready var ray_cast_ledge_right = $RayCastLedgeRight
-@onready var ray_cast_ledge_left = $RayCastLedgeLeft
-@onready var scout_ray_cast_right = $ScoutRayCastRight
-@onready var scout_ray_cast_left = $ScoutRayCastLeft
+@onready var ray_cast_wall = $RayCastWall
+@onready var scout_ray_cast = $ScoutRayCast
+@onready var ray_cast_ledge = $RayCastLedge
 @onready var animated_sprite = $AnimatedSprite2D
 
 signal player_died
@@ -24,15 +21,16 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	# Turn when facing a wall or ledge
-	if ray_cast_wall_right.is_colliding() or !ray_cast_ledge_right.is_colliding():
-		direction = -1
-		animated_sprite.flip_h = true
-	if ray_cast_wall_left.is_colliding() or !ray_cast_ledge_left.is_colliding():
-		direction = 1
-		animated_sprite.flip_h = false
+	if ray_cast_wall.is_colliding() or !ray_cast_ledge.is_colliding():
+		direction *= -1
+		animated_sprite.flip_h = not animated_sprite.flip_h
+		ray_cast_ledge.target_position.x *= -1
+		ray_cast_ledge.position.x *= -1
+		ray_cast_wall.target_position.x *= -1
+		scout_ray_cast.target_position.x *= -1
 		
 	# Check for a player nearby
-	if (scout_ray_cast_left.is_colliding() and direction < 0 or scout_ray_cast_right.is_colliding() and direction > 0):
+	if (scout_ray_cast.is_colliding()):
 		speed = ATTACK_SPEED
 	else:
 		speed = PATROL_SPEED
