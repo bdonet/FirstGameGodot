@@ -71,12 +71,11 @@ func _physics_process(delta):
 				animated_sprite.play("idle")
 			else:
 				animated_sprite.play("run")
-		else:
-			animated_sprite.play("jump")
-			
+		
 		# Handle jump.
 		if (Input.is_action_just_pressed("jump") or jump_saved) and (is_on_floor() or (coyote_ray_cast.is_colliding())):
 			velocity.y = JUMP_VELOCITY
+			animated_sprite.play("jump")
 			print("Jumped")
 			jump_saved = false
 			climb_saved = false
@@ -94,11 +93,13 @@ func _physics_process(delta):
 				velocity.y = LOW_CLIMB_VELOCITY
 				climb_saved = false
 				jump_saved = false
+				animated_sprite.play("climb_low")
 				print("Climbed low")
 			elif climbType == ClimbType.High:
 				velocity.y = HIGH_CLIMB_VELOCITY
 				climb_saved = false
 				jump_saved = false
+				animated_sprite.play("climb_high")
 				print("Climbed high")
 				
 		# Handle climb just before valid climbing
