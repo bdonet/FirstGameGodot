@@ -19,7 +19,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var area_level_1 = $AreaLevel1
 @onready var area_level_2 = $AreaLevel2
 @onready var area_level_3 = $AreaLevel3
-@onready var climb_indicator = $ClimbIndicator
 @onready var jump_save_timer = $JumpSaveTimer
 @onready var climb_save_timer = $ClimbSaveTimer
 
@@ -51,9 +50,6 @@ func _physics_process(delta):
 	if not can_move:
 		# Stop the player
 		velocity.x = 0
-		
-		# Remove the climb indicator
-		climb_indicator.visible = false
 		
 		# Play animations
 		if not is_dead:
@@ -115,25 +111,16 @@ func _physics_process(delta):
 		# Flip the sprites and movement objects to face the current direction
 		if direction > 0:
 			animated_sprite.flip_h = false
-			climb_indicator.offset.x = abs(climb_indicator.offset.x)
 			coyote_ray_cast.target_position.x = -abs(coyote_ray_cast.target_position.x)
 			area_level_1.position.x = abs(area_level_1.position.x)
 			area_level_2.position.x = abs(area_level_2.position.x)
 			area_level_3.position.x = abs(area_level_3.position.x)
 		elif direction < 0:
 			animated_sprite.flip_h = true
-			climb_indicator.offset.x = -abs(climb_indicator.offset.x)		
 			coyote_ray_cast.target_position.x = abs(coyote_ray_cast.target_position.x)
 			area_level_1.position.x = -abs(area_level_1.position.x)
 			area_level_2.position.x = -abs(area_level_2.position.x)
 			area_level_3.position.x = -abs(area_level_3.position.x)
-			
-		# Display an indicator if a climb is possible
-		var currentClimbType = GetClimbType()
-		if (currentClimbType == ClimbType.None):
-			climb_indicator.visible = false
-		else:
-			climb_indicator.visible = true
 		
 		# Move the player
 		if direction:
