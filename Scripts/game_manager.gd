@@ -66,3 +66,14 @@ func _on_apple_platform_player_boarded():
 	if apples > 0:
 		player.freeze()
 		apple_platform_animation_player.play("roll_credits")
+
+
+func _on_player_fell():
+	# Wait a bit for a death scene
+	Engine.time_scale = 0.5
+	death_timer.start()
+	
+	print("You fell!")
+	player.kill()
+	deaths += 1
+	setDeathLabelText()
