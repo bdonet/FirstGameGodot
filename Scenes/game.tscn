@@ -992,19 +992,19 @@ libraries = {
 autoplay = "move14"
 
 [node name="Platform4" parent="Platforms" instance=ExtResource("3_6kgq8")]
-position = Vector2(643, -157)
+position = Vector2(640, -155)
 
 [node name="Platform5" parent="Platforms" instance=ExtResource("3_6kgq8")]
-position = Vector2(694, -191)
+position = Vector2(688, -187)
 
 [node name="Platform11" parent="Platforms" instance=ExtResource("3_6kgq8")]
-position = Vector2(694, -270)
+position = Vector2(688, -252)
 
 [node name="Platform6" parent="Platforms" instance=ExtResource("3_6kgq8")]
-position = Vector2(643, -229)
+position = Vector2(641, -219)
 
 [node name="Platform12" parent="Platforms" instance=ExtResource("3_6kgq8")]
-position = Vector2(643, -305)
+position = Vector2(641, -283)
 
 [node name="Platform7" parent="Platforms" instance=ExtResource("3_6kgq8")]
 position = Vector2(33, -258)
@@ -1280,7 +1280,7 @@ position = Vector2(8, -33)
 position = Vector2(568, -129)
 
 [node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
-position = Vector2(642, -311)
+position = Vector2(640, -289)
 
 [node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("15_bbtyw")]
 position = Vector2(104, -241)
