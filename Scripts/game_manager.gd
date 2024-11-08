@@ -40,7 +40,7 @@ func _on_coins_pickup():
 	add_point()
 
 func _on_player_died():
-	if (!player.is_dead):
+	if (!player.is_invincible):
 		# Wait a bit for a death scene
 		Engine.time_scale = 0.5
 		death_timer.start()

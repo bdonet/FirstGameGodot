@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://y5wafvwwae4l"]
+[gd_scene load_steps=42 format=3 uid="uid://y5wafvwwae4l"]
 
 [ext_resource type="Texture2D" uid="uid://ch3chr00827ip" path="res://Assets/sprites/knight.png" id="1_bgorp"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_i7ida"]
@@ -63,6 +63,26 @@ region = Rect2(96, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_v0do4"]
 atlas = ExtResource("1_bgorp")
 region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohrjo"]
+atlas = ExtResource("1_bgorp")
+region = Rect2(64, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_soe4v"]
+atlas = ExtResource("1_bgorp")
+region = Rect2(96, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxhpq"]
+atlas = ExtResource("1_bgorp")
+region = Rect2(128, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20w12"]
+atlas = ExtResource("1_bgorp")
+region = Rect2(160, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsmhb"]
+atlas = ExtResource("1_bgorp")
+region = Rect2(224, 224, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_33uaj"]
 atlas = ExtResource("1_bgorp")
@@ -202,6 +222,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ohrjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_soe4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxhpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20w12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsmhb")
+}],
+"loop": false,
+"name": &"roll",
+"speed": 17.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_33uaj")
 }, {
 "duration": 1.0,
@@ -266,8 +306,10 @@ script = ExtResource("1_i7ida")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_m20om")
-animation = &"climb_high"
+animation = &"roll"
 autoplay = "idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -295,5 +337,6 @@ wait_time = 0.05
 one_shot = true
 
 [connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="JumpSaveTimer" to="." method="_on_jump_save_timer_timeout"]
 [connection signal="timeout" from="ClimbSaveTimer" to="." method="_on_climb_save_timer_timeout"]
