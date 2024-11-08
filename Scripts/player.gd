@@ -38,11 +38,17 @@ func _on_ready():
 
 func freeze():
 	can_move = false
+	is_rolling = false
+	is_long_jumping = false
+	reset_saved_moves()
 
 func kill():
 	can_move = false
 	is_dead = true
 	is_invincible = true
+	is_rolling = false
+	is_long_jumping = false
+	reset_saved_moves()
 	animated_sprite.play("death")
 
 func revive():
