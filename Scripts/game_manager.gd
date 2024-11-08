@@ -40,14 +40,15 @@ func _on_coins_pickup():
 	add_point()
 
 func _on_player_died():
-	# Wait a bit for a death scene
-	Engine.time_scale = 0.5
-	death_timer.start()
-	
-	print("You died!")
-	player.kill()
-	deaths += 1
-	setDeathLabelText()
+	if (!player.is_dead):
+		# Wait a bit for a death scene
+		Engine.time_scale = 0.5
+		death_timer.start()
+		
+		print("You died!")
+		player.kill()
+		deaths += 1
+		setDeathLabelText()
 
 func _on_death_timer_timeout():
 	# Make time move normally again
