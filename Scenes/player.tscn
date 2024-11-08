@@ -332,6 +332,10 @@ position = Vector2(10, -40)
 wait_time = 0.05
 one_shot = true
 
+[node name="LongJumpSaveTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
 [node name="ClimbSaveTimer" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
@@ -339,4 +343,5 @@ one_shot = true
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="JumpSaveTimer" to="." method="_on_jump_save_timer_timeout"]
+[connection signal="timeout" from="LongJumpSaveTimer" to="." method="_on_long_jump_save_timer_timeout"]
 [connection signal="timeout" from="ClimbSaveTimer" to="." method="_on_climb_save_timer_timeout"]

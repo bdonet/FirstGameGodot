@@ -1,16 +1,22 @@
 extends CharacterBody2D
 
 const SPEED = 115.0
+const LONG_JUMP_BONUS = 50.0
 const JUMP_VELOCITY = -150.0
 const LOW_CLIMB_VELOCITY = -230.0
 const HIGH_CLIMB_VELOCITY = -320.0
+const HORIZONTAL_ACCELERATION_MULTIPLIER = 9
+const HORIZONTAL_DECELERATION_MULTIPLIER = 8
 
 var is_dead = false
 var is_invincible = false
 var is_rolling = false
+var is_long_jumping = false
 var jump_saved = false
+var long_jump_saved = false
 var climb_saved = false
 var can_move = true
+var can_long_jump = false
 var rolling_direction
 var start_position
 
@@ -23,6 +29,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var area_level_2 = $AreaLevel2
 @onready var area_level_3 = $AreaLevel3
 @onready var jump_save_timer = $JumpSaveTimer
+@onready var long_jump_save_timer = $LongJumpSaveTimer
 @onready var climb_save_timer = $ClimbSaveTimer
 
 # Save the starting position so we know where to reset to on death	
@@ -65,16 +72,31 @@ func _physics_process(delta):
 	else:
 		# Get the direction of movement. Can be -1, 0, or 1
 		var direction = Input.get_axis("move_left", "move_right")
-			
-		if not is_rolling:
-			# Play animations
+		
+		if is_rolling:
+			if Input.is_action_just_pressed("jump"):
+				long_jump_saved = true
+				print("long jump saved")
+		else:
+			# Play continuous animations
 			if is_on_floor():
 				if direction == 0:
 					animated_sprite.play("idle")
 				else:
 					animated_sprite.play("run")
 			
-			# Handle jump.
+			# Stop long jumping, if applicable
+			if is_on_floor():
+				is_long_jumping = false
+			
+			if area_level_1.isColliding:
+				is_long_jumping = false
+				
+			# Handle long jumping
+			if (long_jump_saved or (Input.is_action_just_pressed("jump") and can_long_jump)) and (is_on_floor() or coyote_ray_cast.is_colliding()):
+				long_jump()
+			
+			# Handle jump
 			if (Input.is_action_just_pressed("jump") or jump_saved) and (is_on_floor() or (coyote_ray_cast.is_colliding())):
 				velocity.y = JUMP_VELOCITY
 				animated_sprite.play("jump")
@@ -141,11 +163,13 @@ func _physics_process(delta):
 		
 		# Move the player
 		if is_rolling:
-			velocity.x = move_toward(velocity.x, rolling_direction * SPEED, SPEED * delta * 9)
+			velocity.x = move_toward(velocity.x, rolling_direction * SPEED, SPEED * delta * HORIZONTAL_ACCELERATION_MULTIPLIER)
+		elif is_long_jumping:
+			velocity.x = rolling_direction * (SPEED + LONG_JUMP_BONUS)
 		elif direction:
-			velocity.x = move_toward(velocity.x, direction * SPEED, SPEED * delta * 9)
+			velocity.x = move_toward(velocity.x, direction * SPEED, SPEED * delta * HORIZONTAL_ACCELERATION_MULTIPLIER)
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED * delta * 8)
+			velocity.x = move_toward(velocity.x, 0, SPEED * delta * HORIZONTAL_DECELERATION_MULTIPLIER)
 
 	# Apply the movement to the player
 	move_and_slide()
@@ -175,7 +199,25 @@ func _on_climb_save_timer_timeout():
 	print("Climb expired")
 
 
+func _on_long_jump_save_timer_timeout():
+	can_long_jump = false
+	print("Long jump expired")
+
 func _on_animated_sprite_2d_animation_finished():
 	if is_rolling:
 		is_invincible = false
 		is_rolling = false
+		can_long_jump = true
+		long_jump_save_timer.start()
+
+func long_jump():
+	velocity.y = JUMP_VELOCITY
+	animated_sprite.play("jump")
+	print("Long jumped")
+	is_long_jumping = true
+	reset_saved_moves()
+	
+func reset_saved_moves():
+	long_jump_saved = false
+	jump_saved = false
+	climb_saved = false
