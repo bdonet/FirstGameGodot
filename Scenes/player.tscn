@@ -315,10 +315,6 @@ frame_progress = 1.0
 position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_ci2j7")
 
-[node name="CoyoteRayCast" type="RayCast2D" parent="."]
-position = Vector2(0, 1)
-target_position = Vector2(-13, 0)
-
 [node name="AreaLevel1" parent="." instance=ExtResource("3_u0ss2")]
 position = Vector2(10, -8)
 
@@ -340,8 +336,13 @@ one_shot = true
 wait_time = 0.05
 one_shot = true
 
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="JumpSaveTimer" to="." method="_on_jump_save_timer_timeout"]
 [connection signal="timeout" from="LongJumpSaveTimer" to="." method="_on_long_jump_save_timer_timeout"]
 [connection signal="timeout" from="ClimbSaveTimer" to="." method="_on_climb_save_timer_timeout"]
+[connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]

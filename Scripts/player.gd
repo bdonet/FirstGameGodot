@@ -12,10 +12,12 @@ var is_dead = false
 var is_invincible = false
 var is_rolling = false
 var is_long_jumping = false
+var was_on_floor = false
 var jump_saved = false
 var long_jump_saved = false
 var climb_saved = false
 var can_move = true
+var can_coyote_jump = false
 var can_long_jump = false
 var rolling_direction
 var start_position
@@ -24,13 +26,13 @@ var start_position
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var coyote_ray_cast = $CoyoteRayCast
 @onready var area_level_1 = $AreaLevel1
 @onready var area_level_2 = $AreaLevel2
 @onready var area_level_3 = $AreaLevel3
 @onready var jump_save_timer = $JumpSaveTimer
 @onready var long_jump_save_timer = $LongJumpSaveTimer
 @onready var climb_save_timer = $ClimbSaveTimer
+@onready var coyote_jump_timer = $CoyoteJumpTimer
 
 # Save the starting position so we know where to reset to on death	
 func _on_ready():
@@ -61,6 +63,17 @@ func save_checkpoint(checkpoint_position):
 	start_position = checkpoint_position
 
 func _physics_process(delta):
+	print(str(was_on_floor) + " " + str(!is_on_floor()))
+	
+	# Check for a possible coyote jump
+	if was_on_floor and !is_on_floor():
+		can_coyote_jump = true
+		print("Can coyote jump")
+		coyote_jump_timer.start()
+	
+	# Record whether the player is currently on the ground for next method run
+	was_on_floor = is_on_floor()
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -82,7 +95,6 @@ func _physics_process(delta):
 		if is_rolling:
 			if Input.is_action_just_pressed("jump"):
 				long_jump_saved = true
-				print("long jump saved")
 		else:
 			# Play continuous animations
 			if is_on_floor():
@@ -104,16 +116,15 @@ func _physics_process(delta):
 			
 			# Handle jump
 			if (Input.is_action_just_pressed("jump") or jump_saved) and can_jump():
+				can_coyote_jump = false
 				velocity.y = JUMP_VELOCITY
 				animated_sprite.play("jump")
-				print("Jumped")
 				jump_saved = false
 				climb_saved = false
 				
 			# Handle jump just before hitting ground
 			if Input.is_action_just_pressed("jump") and !can_jump() and velocity.y > 0:
 				jump_saved = true
-				print("jump saved")
 				jump_save_timer.start()
 				
 			# Handle climb
@@ -124,18 +135,15 @@ func _physics_process(delta):
 					climb_saved = false
 					jump_saved = false
 					animated_sprite.play("climb_low")
-					print("Climbed low")
 				elif climbType == ClimbType.High:
 					velocity.y = HIGH_CLIMB_VELOCITY
 					climb_saved = false
 					jump_saved = false
 					animated_sprite.play("climb_high")
-					print("Climbed high")
 					
 			# Handle climb just before valid climbing
 			if Input.is_action_just_pressed("climb") and !is_on_floor() and (GetClimbType() == ClimbType.None):
 				climb_saved = true
-				print("climb saved")
 				climb_save_timer.start()
 			
 			# Reset climb saving when on ground
@@ -157,13 +165,11 @@ func _physics_process(delta):
 			# Flip the sprites and movement objects to face the current direction
 			if direction > 0:
 				animated_sprite.flip_h = false
-				coyote_ray_cast.target_position.x = -abs(coyote_ray_cast.target_position.x)
 				area_level_1.position.x = abs(area_level_1.position.x)
 				area_level_2.position.x = abs(area_level_2.position.x)
 				area_level_3.position.x = abs(area_level_3.position.x)
 			elif direction < 0:
 				animated_sprite.flip_h = true
-				coyote_ray_cast.target_position.x = abs(coyote_ray_cast.target_position.x)
 				area_level_1.position.x = -abs(area_level_1.position.x)
 				area_level_2.position.x = -abs(area_level_2.position.x)
 				area_level_3.position.x = -abs(area_level_3.position.x)
@@ -177,7 +183,7 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, direction * SPEED, SPEED * delta * HORIZONTAL_ACCELERATION_MULTIPLIER)
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED * delta * HORIZONTAL_DECELERATION_MULTIPLIER)
-
+	
 	# Apply the movement to the player
 	move_and_slide()
 	
@@ -218,9 +224,9 @@ func _on_animated_sprite_2d_animation_finished():
 		long_jump_save_timer.start()
 
 func long_jump():
+	can_coyote_jump = false
 	velocity.y = JUMP_VELOCITY
 	animated_sprite.play("jump")
-	print("Long jumped")
 	is_long_jumping = true
 	reset_saved_moves()
 	
@@ -228,6 +234,12 @@ func reset_saved_moves():
 	long_jump_saved = false
 	jump_saved = false
 	climb_saved = false
+	can_coyote_jump = false
 	
 func can_jump():
-	return is_on_floor() or coyote_ray_cast.is_colliding()
+	return is_on_floor() or can_coyote_jump
+
+
+func _on_coyote_jump_timer_timeout():
+	can_coyote_jump = false
+	print("Coyote jump expired")
