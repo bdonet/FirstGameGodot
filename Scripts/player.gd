@@ -99,11 +99,11 @@ func _physics_process(delta):
 				is_long_jumping = false
 				
 			# Handle long jumping
-			if (long_jump_saved or (Input.is_action_just_pressed("jump") and can_long_jump)) and (is_on_floor() or coyote_ray_cast.is_colliding()):
+			if (long_jump_saved or (Input.is_action_just_pressed("jump") and can_long_jump)) and can_jump():
 				long_jump()
 			
 			# Handle jump
-			if (Input.is_action_just_pressed("jump") or jump_saved) and (is_on_floor() or (coyote_ray_cast.is_colliding())):
+			if (Input.is_action_just_pressed("jump") or jump_saved) and can_jump():
 				velocity.y = JUMP_VELOCITY
 				animated_sprite.play("jump")
 				print("Jumped")
@@ -111,7 +111,7 @@ func _physics_process(delta):
 				climb_saved = false
 				
 			# Handle jump just before hitting ground
-			if Input.is_action_just_pressed("jump") and !is_on_floor() and velocity.y > 0:
+			if Input.is_action_just_pressed("jump") and !can_jump() and velocity.y > 0:
 				jump_saved = true
 				print("jump saved")
 				jump_save_timer.start()
@@ -141,7 +141,8 @@ func _physics_process(delta):
 			# Reset climb saving when on ground
 			if is_on_floor():
 				climb_saved = false
-				
+			
+			# Handle roll
 			if Input.is_action_just_pressed("roll"):
 				is_invincible = true
 				is_rolling = true
@@ -227,3 +228,6 @@ func reset_saved_moves():
 	long_jump_saved = false
 	jump_saved = false
 	climb_saved = false
+	
+func can_jump():
+	return is_on_floor() or coyote_ray_cast.is_colliding()
