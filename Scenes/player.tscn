@@ -333,7 +333,7 @@ wait_time = 0.05
 one_shot = true
 
 [node name="LongJumpSaveTimer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.1
 one_shot = true
 
 [node name="ClimbSaveTimer" type="Timer" parent="."]
