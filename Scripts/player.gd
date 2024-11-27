@@ -7,12 +7,14 @@ const LOW_CLIMB_VELOCITY = -230.0
 const HIGH_CLIMB_VELOCITY = -320.0
 const HORIZONTAL_ACCELERATION_MULTIPLIER = 9
 const HORIZONTAL_DECELERATION_MULTIPLIER = 8
+const STUNNING_FALLING_SPEED = 550
 
 var is_dead = false
 var is_invincible = false
 var is_rolling = false
 var is_long_jumping = false
 var was_on_floor = false
+var previous_falling_speed = 0
 var jump_saved = false
 var long_jump_saved = false
 var climb_saved = false
@@ -33,6 +35,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var long_jump_save_timer = $LongJumpSaveTimer
 @onready var climb_save_timer = $ClimbSaveTimer
 @onready var coyote_jump_timer = $CoyoteJumpTimer
+@onready var stun_timer = $StunTimer
 
 # Save the starting position so we know where to reset to on death	
 func _on_ready():
@@ -43,6 +46,9 @@ func freeze():
 	is_rolling = false
 	is_long_jumping = false
 	reset_saved_moves()
+
+func unfreeze():
+	can_move = true
 
 func kill():
 	can_move = false
@@ -63,6 +69,13 @@ func save_checkpoint(checkpoint_position):
 	start_position = checkpoint_position
 
 func _physics_process(delta):
+	# Check for a fall large enough to stun
+	if !was_on_floor and is_on_floor():
+		if (previous_falling_speed > STUNNING_FALLING_SPEED):
+			print("Landed at stunning speed " + str(previous_falling_speed))
+			freeze()
+			stun_timer.start()
+	
 	# Check for a possible coyote jump
 	if was_on_floor and !is_on_floor():
 		can_coyote_jump = true
@@ -71,10 +84,13 @@ func _physics_process(delta):
 	# Record whether the player is currently on the ground for next method run
 	was_on_floor = is_on_floor()
 	
-	# Add the gravity.
+	# Add the gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
-		
+	
+	# Save the current falling speed for next method run
+	previous_falling_speed = velocity.y
+	
 	if not can_move:
 		# Stop the player
 		velocity.x = 0
@@ -236,3 +252,8 @@ func can_jump():
 
 func _on_coyote_jump_timer_timeout():
 	can_coyote_jump = false
+
+
+func _on_stun_timer_timeout():
+	print("Stun expired")
+	unfreeze()
