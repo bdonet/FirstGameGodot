@@ -10,6 +10,7 @@ const HORIZONTAL_DECELERATION_MULTIPLIER = 8
 const STUNNING_FALLING_SPEED = 550
 
 var is_dead = false
+var is_stunned = false
 var is_invincible = false
 var is_rolling = false
 var is_long_jumping = false
@@ -50,6 +51,16 @@ func freeze():
 func unfreeze():
 	can_move = true
 
+func stun():
+	freeze()
+	is_stunned = true
+	animated_sprite.play("stun")
+	stun_timer.start()
+
+func unstun():
+	can_move = true
+	is_stunned = false
+
 func kill():
 	can_move = false
 	is_dead = true
@@ -72,9 +83,7 @@ func _physics_process(delta):
 	# Check for a fall large enough to stun
 	if !was_on_floor and is_on_floor():
 		if (previous_falling_speed > STUNNING_FALLING_SPEED):
-			print("Landed at stunning speed " + str(previous_falling_speed))
-			freeze()
-			stun_timer.start()
+			stun()
 	
 	# Check for a possible coyote jump
 	if was_on_floor and !is_on_floor():
@@ -96,7 +105,7 @@ func _physics_process(delta):
 		velocity.x = 0
 		
 		# Play animations
-		if not is_dead and not is_rolling:
+		if not is_dead and not is_rolling and not is_stunned:
 			if is_on_floor():
 				animated_sprite.play("idle")
 			else:
@@ -255,5 +264,4 @@ func _on_coyote_jump_timer_timeout():
 
 
 func _on_stun_timer_timeout():
-	print("Stun expired")
-	unfreeze()
+	unstun()
