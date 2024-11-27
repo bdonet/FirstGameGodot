@@ -74,6 +74,7 @@ func revive():
 	can_move = true
 	is_dead = false
 	is_invincible = false
+	velocity.y = 0
 	position = start_position
 
 func save_checkpoint(checkpoint_position):
