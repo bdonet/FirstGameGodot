@@ -45,7 +45,6 @@ func _on_player_died():
 		Engine.time_scale = 0.5
 		death_timer.start()
 		
-		print("You died!")
 		player.kill()
 		deaths += 1
 		setDeathLabelText()
@@ -59,7 +58,6 @@ func _on_death_timer_timeout():
 
 func _on_checkpoint_reached(checkpoint_position):
 	player.save_checkpoint(checkpoint_position)
-	print("Checkpoint reached")
 
 
 func _on_apple_platform_player_boarded():
@@ -73,7 +71,6 @@ func _on_player_fell():
 	Engine.time_scale = 0.5
 	death_timer.start()
 	
-	print("You fell!")
 	player.kill()
 	deaths += 1
 	setDeathLabelText()

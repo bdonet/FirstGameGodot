@@ -63,12 +63,9 @@ func save_checkpoint(checkpoint_position):
 	start_position = checkpoint_position
 
 func _physics_process(delta):
-	print(str(was_on_floor) + " " + str(!is_on_floor()))
-	
 	# Check for a possible coyote jump
 	if was_on_floor and !is_on_floor():
 		can_coyote_jump = true
-		print("Can coyote jump")
 		coyote_jump_timer.start()
 	
 	# Record whether the player is currently on the ground for next method run
@@ -204,17 +201,14 @@ func GetClimbType():
 
 func _on_jump_save_timer_timeout():
 	jump_saved = false
-	print("Jump expired")
 
 
 func _on_climb_save_timer_timeout():
 	climb_saved = false
-	print("Climb expired")
 
 
 func _on_long_jump_save_timer_timeout():
 	can_long_jump = false
-	print("Long jump expired")
 
 func _on_animated_sprite_2d_animation_finished():
 	if is_rolling:
@@ -242,4 +236,3 @@ func can_jump():
 
 func _on_coyote_jump_timer_timeout():
 	can_coyote_jump = false
-	print("Coyote jump expired")
