@@ -8,6 +8,7 @@ const HIGH_CLIMB_VELOCITY = -320.0
 const HORIZONTAL_ACCELERATION_MULTIPLIER = 9
 const HORIZONTAL_DECELERATION_MULTIPLIER = 8
 const STUNNING_FALLING_SPEED = 550
+const LANDING_FALLING_SPEED = 150
 
 var is_dead = false
 var is_stunned = false
@@ -87,11 +88,14 @@ func save_checkpoint(checkpoint_position):
 func _physics_process(delta):
 	# Check if player just landed
 	if !was_on_floor and is_on_floor():
-		just_landed = true
+		print("Landed at speed " + str(previous_falling_speed))
+		if (previous_falling_speed > LANDING_FALLING_SPEED):
+			print("Landed")
+			just_landed = true
 		
 		# Check for a fall large enough to stun
-		if (!is_invincible):
-			if (previous_falling_speed > STUNNING_FALLING_SPEED):
+		if (previous_falling_speed > STUNNING_FALLING_SPEED):
+			if (!is_invincible):
 				stun()
 	
 	# Check for a possible coyote jump
@@ -122,7 +126,10 @@ func _physics_process(delta):
 		# Play animations
 		if not is_dead and not is_rolling and not is_stunned:
 			if is_on_floor():
-				animated_sprite.play("idle")
+				if just_landed:
+					animated_sprite.play("landed")
+				else:
+					animated_sprite.play("idle")
 			else:
 				animated_sprite.play("jump")
 	else:
@@ -156,6 +163,7 @@ func _physics_process(delta):
 			
 			# Handle jump
 			if (Input.is_action_just_pressed("jump") or jump_saved) and can_jump():
+				just_landed = false
 				can_coyote_jump = false
 				velocity.y = JUMP_VELOCITY
 				animated_sprite.play("jump")
@@ -169,6 +177,7 @@ func _physics_process(delta):
 				
 			# Handle climb
 			if Input.is_action_just_pressed("climb") or climb_saved:
+				just_landed = false
 				var climbType = GetClimbType()
 				if climbType == ClimbType.Low:
 					velocity.y = LOW_CLIMB_VELOCITY
@@ -255,6 +264,7 @@ func _on_animated_sprite_2d_animation_finished():
 		just_landed = false
 
 func long_jump():
+	just_landed = false
 	can_coyote_jump = false
 	velocity.y = JUMP_VELOCITY
 	animated_sprite.play("jump")
@@ -262,6 +272,7 @@ func long_jump():
 	reset_saved_moves()
 
 func roll():
+	just_landed = false
 	is_invincible = true
 	is_rolling = true
 	
@@ -277,6 +288,7 @@ func reset_saved_moves():
 	jump_saved = false
 	climb_saved = false
 	can_coyote_jump = false
+	just_landed = false
 	
 func can_jump():
 	return is_on_floor() or can_coyote_jump
