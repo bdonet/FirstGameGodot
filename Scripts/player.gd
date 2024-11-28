@@ -176,15 +176,7 @@ func _physics_process(delta):
 			
 			# Handle roll
 			if Input.is_action_just_pressed("roll"):
-				is_invincible = true
-				is_rolling = true
-				
-				if animated_sprite.flip_h:
-					rolling_direction = -1
-				else:
-					rolling_direction = 1
-				
-				animated_sprite.play("roll")
+				roll()
 				
 			# Flip the sprites and movement objects to face the current direction
 			if direction > 0:
@@ -250,7 +242,18 @@ func long_jump():
 	animated_sprite.play("jump")
 	is_long_jumping = true
 	reset_saved_moves()
+
+func roll():
+	is_invincible = true
+	is_rolling = true
 	
+	if animated_sprite.flip_h:
+		rolling_direction = -1
+	else:
+		rolling_direction = 1
+	
+	animated_sprite.play("roll")
+
 func reset_saved_moves():
 	long_jump_saved = false
 	jump_saved = false
