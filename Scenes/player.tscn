@@ -355,8 +355,6 @@ position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_m20om")
 animation = &"stun"
 autoplay = "idle"
-frame = 4
-frame_progress = 0.76743
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -391,8 +389,9 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="RollSaveTimer" type="Timer" parent="."]
+[node name="StunnedRollTimer" type="Timer" parent="."]
 wait_time = 0.1
+one_shot = true
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
@@ -401,4 +400,4 @@ wait_time = 0.1
 [connection signal="timeout" from="ClimbSaveTimer" to="." method="_on_climb_save_timer_timeout"]
 [connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_coyote_jump_timer_timeout"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
-[connection signal="timeout" from="RollSaveTimer" to="." method="_on_roll_save_timer_timeout"]
+[connection signal="timeout" from="StunnedRollTimer" to="." method="_on_stunned_roll_timer_timeout"]

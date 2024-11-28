@@ -38,7 +38,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var climb_save_timer = $ClimbSaveTimer
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var stun_timer = $StunTimer
-@onready var roll_save_timer = $RollSaveTimer
+@onready var stunned_roll_timer = $StunnedRollTimer
 
 # Save the starting position so we know where to reset to on death	
 func _on_ready():
@@ -57,8 +57,7 @@ func stun():
 	freeze()
 	is_stunned = true
 	can_roll = true
-	animated_sprite.play("stun")
-	roll_save_timer.start()
+	stunned_roll_timer.start()
 	stun_timer.start()
 
 func unstun():
@@ -112,6 +111,7 @@ func _physics_process(delta):
 		
 		# Roll through a stun when barely late
 		if is_stunned and can_roll and Input.is_action_just_pressed("roll"):
+			stunned_roll_timer.stop()
 			roll()
 			unstun()
 		
@@ -281,5 +281,7 @@ func _on_stun_timer_timeout():
 	unstun()
 
 
-func _on_roll_save_timer_timeout():
+func _on_stunned_roll_timer_timeout():
 	can_roll = false
+	print("roll save expired")
+	animated_sprite.play("stun")
