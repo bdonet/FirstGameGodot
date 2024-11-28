@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://y5wafvwwae4l"]
+[gd_scene load_steps=50 format=3 uid="uid://y5wafvwwae4l"]
 
 [ext_resource type="Texture2D" uid="uid://ch3chr00827ip" path="res://Assets/sprites/knight.png" id="1_bgorp"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_i7ida"]
@@ -63,6 +63,14 @@ region = Rect2(96, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_v0do4"]
 atlas = ExtResource("1_bgorp")
 region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qx2e"]
+atlas = ExtResource("1_bgorp")
+region = Rect2(64, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxsxv"]
+atlas = ExtResource("1_bgorp")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ohrjo"]
 atlas = ExtResource("1_bgorp")
@@ -246,6 +254,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_6qx2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxsxv")
+}],
+"loop": false,
+"name": &"landed",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ohrjo")
 }, {
 "duration": 1.0,
@@ -353,8 +372,10 @@ script = ExtResource("1_i7ida")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_m20om")
-animation = &"stun"
+animation = &"landed"
 autoplay = "idle"
+frame = 1
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)

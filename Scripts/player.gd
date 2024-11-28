@@ -23,6 +23,7 @@ var can_move = true
 var can_coyote_jump = false
 var can_long_jump = false
 var can_roll = false
+var just_landed = false
 var rolling_direction
 var start_position
 
@@ -84,8 +85,11 @@ func save_checkpoint(checkpoint_position):
 	start_position = checkpoint_position
 
 func _physics_process(delta):
-	# Check for a fall large enough to stun
+	# Check if player just landed
 	if !was_on_floor and is_on_floor():
+		just_landed = true
+		
+		# Check for a fall large enough to stun
 		if (!is_invincible):
 			if (previous_falling_speed > STUNNING_FALLING_SPEED):
 				stun()
@@ -131,10 +135,13 @@ func _physics_process(delta):
 		else:
 			# Play continuous animations
 			if is_on_floor():
-				if direction == 0:
-					animated_sprite.play("idle")
+				if just_landed:
+					animated_sprite.play("landed")
 				else:
-					animated_sprite.play("run")
+					if direction == 0:
+						animated_sprite.play("idle")
+					else:
+						animated_sprite.play("run")
 			
 			# Stop long jumping, if applicable
 			if is_on_floor():
@@ -244,6 +251,8 @@ func _on_animated_sprite_2d_animation_finished():
 		is_rolling = false
 		can_long_jump = true
 		long_jump_save_timer.start()
+	if just_landed:
+		just_landed = false
 
 func long_jump():
 	can_coyote_jump = false
