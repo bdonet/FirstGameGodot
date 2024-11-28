@@ -83,7 +83,7 @@ func save_checkpoint(checkpoint_position):
 func _physics_process(delta):
 	# Check for a fall large enough to stun
 	if !was_on_floor and is_on_floor():
-		if (!is_rolling):
+		if (!is_invincible):
 			if (previous_falling_speed > STUNNING_FALLING_SPEED):
 				stun()
 	
