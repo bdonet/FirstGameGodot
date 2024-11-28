@@ -22,6 +22,7 @@ var climb_saved = false
 var can_move = true
 var can_coyote_jump = false
 var can_long_jump = false
+var can_roll = false
 var rolling_direction
 var start_position
 
@@ -37,6 +38,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var climb_save_timer = $ClimbSaveTimer
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var stun_timer = $StunTimer
+@onready var roll_save_timer = $RollSaveTimer
 
 # Save the starting position so we know where to reset to on death	
 func _on_ready():
@@ -54,7 +56,9 @@ func unfreeze():
 func stun():
 	freeze()
 	is_stunned = true
+	can_roll = true
 	animated_sprite.play("stun")
+	roll_save_timer.start()
 	stun_timer.start()
 
 func unstun():
@@ -105,6 +109,11 @@ func _physics_process(delta):
 	if not can_move:
 		# Stop the player
 		velocity.x = 0
+		
+		# Roll through a stun when barely late
+		if is_stunned and can_roll and Input.is_action_just_pressed("roll"):
+			roll()
+			unstun()
 		
 		# Play animations
 		if not is_dead and not is_rolling and not is_stunned:
@@ -270,3 +279,7 @@ func _on_coyote_jump_timer_timeout():
 
 func _on_stun_timer_timeout():
 	unstun()
+
+
+func _on_roll_save_timer_timeout():
+	can_roll = false
