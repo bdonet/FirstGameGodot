@@ -10,6 +10,9 @@ const HORIZONTAL_DECELERATION_MULTIPLIER = 8
 const STUNNING_FALLING_SPEED = 550
 const LANDING_FALLING_SPEED = 150
 
+signal player_climbed_low
+signal player_climbed_high
+
 var is_dead = false
 var is_stunned = false
 var is_invincible = false
@@ -197,12 +200,14 @@ func _physics_process(delta):
 					climb_saved = false
 					jump_saved = false
 					animated_sprite.play("climb_low")
+					player_climbed_low.emit(position, animated_sprite.flip_h)
 				elif climbType == ClimbType.High:
 					velocity.y = HIGH_CLIMB_VELOCITY
 					climb_saved = false
 					jump_saved = false
 					animated_sprite.play("climb_high")
-					
+					player_climbed_high.emit(position, animated_sprite.flip_h)
+			
 			# Handle climb just before valid climbing
 			if Input.is_action_just_pressed("climb") and !is_on_floor() and (GetClimbType() == ClimbType.None):
 				save_climb()
