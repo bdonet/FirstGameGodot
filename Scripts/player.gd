@@ -12,6 +12,7 @@ const LANDING_FALLING_SPEED = 150
 
 signal player_climbed_low
 signal player_climbed_high
+signal player_attacked
 
 var is_dead = false
 var is_stunned = false
@@ -341,6 +342,7 @@ func attack():
 	is_attacking = true
 	animated_sprite.play("attack")
 	reset_saved_moves()
+	player_attacked.emit(position, animated_sprite.flip_h)
 
 
 func reset_saved_moves():

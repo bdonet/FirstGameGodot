@@ -1360,6 +1360,7 @@ position = Vector2(2328, 119)
 [connection signal="timeout" from="GameManager/DeathTimer" to="GameManager" method="_on_death_timer_timeout"]
 [connection signal="body_entered" from="WorldBottom" to="WorldBottom" method="_on_body_entered"]
 [connection signal="player_fell" from="WorldBottom" to="GameManager" method="_on_player_fell"]
+[connection signal="player_attacked" from="Player" to="." method="_on_player_player_attacked"]
 [connection signal="player_climbed_high" from="Player" to="." method="_on_player_player_climbed_high"]
 [connection signal="player_climbed_low" from="Player" to="." method="_on_player_player_climbed_low"]
 [connection signal="pickup" from="Coins" to="GameManager" method="_on_coins_pickup"]
