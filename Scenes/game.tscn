@@ -1246,6 +1246,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Label8" type="Label" parent="Labels/Label8"]
+layout_mode = 0
 offset_left = -547.0
 offset_top = -47.0
 offset_right = -444.0
