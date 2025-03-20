@@ -173,8 +173,7 @@ func _physics_process(delta):
 				
 			# Handle jump just before hitting ground
 			if Input.is_action_just_pressed("jump") and !can_jump() and velocity.y > 0:
-				jump_saved = true
-				jump_save_timer.start()
+				save_jump()
 				
 			# Handle climb
 			if Input.is_action_just_pressed("climb") or climb_saved:
@@ -193,8 +192,7 @@ func _physics_process(delta):
 					
 			# Handle climb just before valid climbing
 			if Input.is_action_just_pressed("climb") and !is_on_floor() and (GetClimbType() == ClimbType.None):
-				climb_saved = true
-				climb_save_timer.start()
+				save_climb()
 			
 			# Reset climb saving when on ground
 			if is_on_floor():
@@ -248,8 +246,18 @@ func GetClimbType():
 	return ClimbType.None
 
 
+func save_jump():
+	jump_saved = true
+	jump_save_timer.start()
+
+
 func _on_jump_save_timer_timeout():
 	jump_saved = false
+
+
+func save_climb():
+	climb_saved = true
+	climb_save_timer.start()
 
 
 func _on_climb_save_timer_timeout():
