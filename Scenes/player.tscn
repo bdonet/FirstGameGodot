@@ -398,8 +398,10 @@ script = ExtResource("1_i7ida")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_m20om")
-animation = &"climb_low"
+animation = &"attack"
 autoplay = "idle"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -446,6 +448,10 @@ one_shot = true
 wait_time = 0.05
 one_shot = true
 
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="JumpSaveTimer" to="." method="_on_jump_save_timer_timeout"]
@@ -456,3 +462,4 @@ one_shot = true
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="StunnedRollTimer" to="." method="_on_stunned_roll_timer_timeout"]
 [connection signal="timeout" from="AttackSaveTimer" to="." method="_on_attack_save_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
