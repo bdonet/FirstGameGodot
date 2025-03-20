@@ -21,6 +21,8 @@ var previous_falling_speed = 0
 var jump_saved = false
 var long_jump_saved = false
 var climb_saved = false
+var roll_saved = false
+var attack_saved = false
 var can_move = true
 var can_coyote_jump = false
 var can_long_jump = false
@@ -39,6 +41,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var jump_save_timer = $JumpSaveTimer
 @onready var long_jump_save_timer = $LongJumpSaveTimer
 @onready var climb_save_timer = $ClimbSaveTimer
+@onready var roll_save_timer = $RollSaveTimer
+@onready var attack_save_timer = $AttackSaveTimer
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var stun_timer = $StunTimer
 @onready var stunned_roll_timer = $StunnedRollTimer
@@ -199,10 +203,10 @@ func _physics_process(delta):
 				climb_saved = false
 			
 			# Handle roll
-			if Input.is_action_just_pressed("roll"):
+			if Input.is_action_just_pressed("roll") or roll_saved:
 				roll()
 			
-			#Handle attack
+			# Handle attack
 			if Input.is_action_just_pressed("attack"):
 				attack()
 			
@@ -262,6 +266,24 @@ func save_climb():
 
 func _on_climb_save_timer_timeout():
 	climb_saved = false
+
+
+func save_roll():
+	roll_saved = true
+	roll_save_timer.start()
+
+
+func _on_roll_save_timer_timeout():
+	roll_saved = false
+
+
+func save_attack():
+	attack_saved = true
+	attack_save_timer.start()
+
+
+func _on_attack_save_timer_timeout():
+	attack_saved = false
 
 
 func _on_long_jump_save_timer_timeout():
