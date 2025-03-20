@@ -15,6 +15,7 @@ var is_stunned = false
 var is_invincible = false
 var is_rolling = false
 var is_long_jumping = false
+var is_attacking = false
 var was_on_floor = false
 var previous_falling_speed = 0
 var jump_saved = false
@@ -139,7 +140,7 @@ func _physics_process(delta):
 		if is_rolling:
 			if Input.is_action_just_pressed("jump"):
 				long_jump_saved = true
-		else:
+		elif !is_attacking:
 			# Play continuous animations
 			if is_on_floor():
 				if just_landed:
@@ -202,7 +203,11 @@ func _physics_process(delta):
 			# Handle roll
 			if Input.is_action_just_pressed("roll"):
 				roll()
-				
+			
+			#Handle attack
+			if Input.is_action_just_pressed("attack"):
+				attack()
+			
 			# Flip the sprites and movement objects to face the current direction
 			if direction > 0:
 				animated_sprite.flip_h = false
@@ -262,6 +267,8 @@ func _on_animated_sprite_2d_animation_finished():
 		long_jump_save_timer.start()
 	if just_landed:
 		just_landed = false
+	if is_attacking:
+		is_attacking = false
 
 func long_jump():
 	just_landed = false
@@ -282,6 +289,13 @@ func roll():
 		rolling_direction = 1
 	
 	animated_sprite.play("roll")
+
+
+func attack():
+	is_attacking = true
+	animated_sprite.play("attack")
+	reset_saved_moves()
+
 
 func reset_saved_moves():
 	long_jump_saved = false
