@@ -1,5 +1,5 @@
 # Playtesting Instructions
-1. Find the latest release and view its assets.
+1. Find the latest release in GitHub and view its assets. The Releases section should be on the right side of the home page of the repo.
 2. Download the game file that matches your system architecture. Note that only Windows devices are currently supported.
 3. Begin a screen recording, preferrably something that records your screen as you play and your reactions through the camera and microphone. This will help me better understand how players interact with the game. I suggest [OBS](https://obsproject.com/) if you do not have something else you already use.
 4. Run the downloaded game file. Windows Defender may block the app at first, but go ahead and run it anyway. I haven't figured out how to officially publish the file yet.
