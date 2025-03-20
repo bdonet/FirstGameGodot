@@ -146,7 +146,14 @@ func _physics_process(delta):
 				long_jump_saved = true
 			if Input.is_action_just_pressed("attack"):
 				attack_saved = true
-		elif !is_attacking:
+		elif is_attacking:
+			if Input.is_action_just_pressed("jump"):
+				save_jump()
+			if Input.is_action_just_pressed("roll"):
+				save_roll()
+			if Input.is_action_just_pressed("climb"):
+				save_climb()
+		else:
 			# Play continuous animations
 			if is_on_floor():
 				if just_landed:
