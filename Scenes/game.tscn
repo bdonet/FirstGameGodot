@@ -1077,7 +1077,7 @@ pivot_offset = Vector2(104, 97)
 theme_override_colors/font_color = Color(0.0980392, 0.313726, 0.752941, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
 theme_override_font_sizes/font_size = 8
-text = "Up or Space to Jump"
+text = "Up or D to Jump"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -1090,7 +1090,7 @@ pivot_offset = Vector2(104, 97)
 theme_override_colors/font_color = Color(0.0980392, 0.313726, 0.752941, 1)
 theme_override_fonts/font = ExtResource("7_e6ip5")
 theme_override_font_sizes/font_size = 8
-text = "Up or Space to Climb"
+text = "Up or D to Climb"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -1242,6 +1242,18 @@ theme_override_fonts/font = ExtResource("7_e6ip5")
 theme_override_font_sizes/font_size = 8
 text = "The Apple!
 Take it back to the Top of the World"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label8" type="Label" parent="Labels/Label8"]
+offset_left = -547.0
+offset_top = -47.0
+offset_right = -444.0
+offset_bottom = -17.0
+theme_override_colors/font_color = Color(0.0784314, 0.596078, 0.862745, 1)
+theme_override_fonts/font = ExtResource("7_e6ip5")
+theme_override_font_sizes/font_size = 8
+text = "Attack enemies with F"
 horizontal_alignment = 1
 autowrap_mode = 2
 
