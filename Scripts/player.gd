@@ -98,9 +98,7 @@ func save_checkpoint(checkpoint_position):
 func _physics_process(delta):
 	# Check if player just landed
 	if !was_on_floor and is_on_floor():
-		print("Landed at speed " + str(previous_falling_speed))
 		if (previous_falling_speed > LANDING_FALLING_SPEED):
-			print("Landed")
 			just_landed = true
 		
 		# Check for a fall large enough to stun
