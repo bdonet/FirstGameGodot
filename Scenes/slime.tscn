@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ds0yvidhjewdb"]
+[gd_scene load_steps=14 format=3 uid="uid://ds0yvidhjewdb"]
 
 [ext_resource type="Texture2D" uid="uid://cern3pvgac3ph" path="res://Assets/sprites/slime_green.png" id="1_cghu8"]
 [ext_resource type="Script" path="res://Scripts/slime.gd" id="1_xeqd8"]
@@ -23,6 +23,18 @@ region = Rect2(48, 24, 24, 24)
 atlas = ExtResource("1_cghu8")
 region = Rect2(72, 24, 24, 24)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_80t6q"]
+atlas = ExtResource("1_cghu8")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66800"]
+atlas = ExtResource("1_cghu8")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8b5o"]
+atlas = ExtResource("1_cghu8")
+region = Rect2(48, 48, 24, 24)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_yoako"]
 animations = [{
 "frames": [{
@@ -41,6 +53,20 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80t6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66800")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8b5o")
+}],
+"loop": true,
+"name": &"stun",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dmbji"]
@@ -57,6 +83,7 @@ shape = SubResource("RectangleShape2D_bc5jj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_yoako")
+animation = &"stun"
 autoplay = "default"
 
 [node name="Killzone" parent="." instance=ExtResource("2_gwi3a")]
