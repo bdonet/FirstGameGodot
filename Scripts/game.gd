@@ -26,5 +26,9 @@ func _on_player_player_climbed_low(action_position, flip_h):
 func _on_player_player_attacked(action_position, flip_h):
 	var instance = PLAYER_ATTACK.instantiate()
 	add_child(instance)
+	instance.player_hit_enemy.connect(_on_player_attack_player_hit_enemy)
 	instance.apply(action_position, flip_h)
 	instance.fade_and_kill()
+
+func _on_player_attack_player_hit_enemy(enemy):
+	enemy.hit()

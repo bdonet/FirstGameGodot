@@ -37,3 +37,8 @@ func _physics_process(delta):
 
 func _on_killzone_player_died():
 	player_died.emit()
+
+
+func hit():
+	print("Slime was hit!")
+	animated_sprite.play("stun")
