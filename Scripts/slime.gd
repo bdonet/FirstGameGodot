@@ -44,7 +44,6 @@ func _on_killzone_player_died():
 
 
 func stun():
-	print("Slime was hit!")
 	freeze()
 	stun_timer.start()
 	animated_sprite.play("stun")

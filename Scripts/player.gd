@@ -369,5 +369,4 @@ func _on_stun_timer_timeout():
 
 func _on_stunned_roll_timer_timeout():
 	can_roll = false
-	print("roll save expired")
 	animated_sprite.play("stun")

@@ -17,7 +17,6 @@ func apply(new_position, new_flip_h):
 
 
 func _on_body_entered(_body):
-	print("Hit an enemy")
 	player_hit_enemy.emit(_body)
 
 
