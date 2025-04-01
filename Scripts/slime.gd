@@ -13,6 +13,7 @@ var direction = 1
 signal player_died
 
 var canMove = true
+var canAttack = true
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -37,7 +38,8 @@ func _physics_process(delta):
 
 
 func _on_killzone_player_died():
-	player_died.emit()
+	if (canAttack):
+		player_died.emit()
 
 
 func hit():
@@ -48,4 +50,5 @@ func hit():
 
 func freeze():
 	canMove = false
+	canAttack = false
 	velocity.x = 0
