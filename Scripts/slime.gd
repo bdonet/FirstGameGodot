@@ -9,6 +9,7 @@ var direction = 1
 @onready var ray_cast_wall = $RayCastWall
 @onready var ray_cast_ledge = $RayCastLedge
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var stun_timer = $StunTimer
 
 signal player_died
 
@@ -42,9 +43,10 @@ func _on_killzone_player_died():
 		player_died.emit()
 
 
-func hit():
+func stun():
 	print("Slime was hit!")
 	freeze()
+	stun_timer.start()
 	animated_sprite.play("stun")
 
 
@@ -52,3 +54,13 @@ func freeze():
 	canMove = false
 	canAttack = false
 	velocity.x = 0
+
+
+func unfreeze():
+	canMove = true
+	canAttack = true
+
+
+func _on_stun_timer_timeout():
+	unfreeze()
+	animated_sprite.play("default")
