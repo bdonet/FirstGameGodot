@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dblnlg5f4n7w0" path="res://Assets/sprites/skull.png" id="4_6q5u0"]
 [ext_resource type="PackedScene" uid="uid://b4lvrkie6o6px" path="res://Scenes/coin.tscn" id="4_74yda"]
 [ext_resource type="Script" path="res://Scripts/Coins.gd" id="5_6co5i"]
-[ext_resource type="PackedScene" uid="uid://ds0yvidhjewdb" path="res://Scenes/slime.tscn" id="6_ncu74"]
 [ext_resource type="Script" path="res://Scripts/world_bottom.gd" id="7_dftja"]
 [ext_resource type="FontFile" uid="uid://dulee83hm76jb" path="res://Assets/fonts/PixelOperator8.ttf" id="7_e6ip5"]
 [ext_resource type="Texture2D" uid="uid://chr85mtr8t2r1" path="res://Assets/sprites/coin.png" id="10_6cpro"]
@@ -19,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://tr7nxs6sxhr" path="res://Scenes/apple_platform.tscn" id="12_unc4b"]
 [ext_resource type="Script" path="res://Scripts/checkpoints.gd" id="15_83y61"]
 [ext_resource type="PackedScene" uid="uid://n6d4wr624eiu" path="res://Scenes/checkpoint.tscn" id="15_bbtyw"]
+[ext_resource type="PackedScene" uid="uid://bkyofwm7o5iks" path="res://Scenes/slime.tscn" id="15_t5f8u"]
 [ext_resource type="FontFile" uid="uid://bjwi0w48avk4g" path="res://Assets/fonts/PixelOperator8-Bold.ttf" id="16_ph7me"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_1fu6j"]
@@ -1040,23 +1040,23 @@ libraries = {
 [node name="Enemies" type="Node" parent="."]
 script = ExtResource("11_x6det")
 
-[node name="Slime" parent="Enemies" instance=ExtResource("6_ncu74")]
-position = Vector2(441, -295)
+[node name="Slime" parent="Enemies" instance=ExtResource("15_t5f8u")]
+position = Vector2(441, -298)
 
-[node name="Slime3" parent="Enemies" instance=ExtResource("6_ncu74")]
-position = Vector2(1768, 89)
+[node name="Slime2" parent="Enemies" instance=ExtResource("15_t5f8u")]
+position = Vector2(88, -361)
 
-[node name="Slime4" parent="Enemies" instance=ExtResource("6_ncu74")]
-position = Vector2(2248, 185)
+[node name="Slime3" parent="Enemies" instance=ExtResource("15_t5f8u")]
+position = Vector2(1768, 86)
 
-[node name="Slime2" parent="Enemies" instance=ExtResource("6_ncu74")]
-position = Vector2(88, -358)
+[node name="Slime4" parent="Enemies" instance=ExtResource("15_t5f8u")]
+position = Vector2(2248, 182)
 
 [node name="AdvancedSlime" parent="Enemies" instance=ExtResource("10_tt0nk")]
 position = Vector2(1976, 185)
 
-[node name="Slime5" parent="Enemies" instance=ExtResource("6_ncu74")]
-position = Vector2(-2008, 280)
+[node name="Slime5" parent="Enemies" instance=ExtResource("15_t5f8u")]
+position = Vector2(-2008, 277)
 
 [node name="Labels" type="Node" parent="."]
 

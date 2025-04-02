@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://k1xcr44gpyd1"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_jgfrl"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_jgfrl")
+
+[node name="StunTimer" type="Timer" parent="."]
