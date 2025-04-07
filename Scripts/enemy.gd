@@ -10,9 +10,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var stun_timer = $StunTimer
 
 signal player_died
+signal enemy_died
 
 var canMove = true
 var canAttack = true
+var health = 1
 
 
 func _on_killzone_player_died():
@@ -22,11 +24,18 @@ func _on_killzone_player_died():
 
 func stun():
 	freeze()
-	velocity.x = 0
-	stun_timer.start()
+	if (--health == 0):
+		kill()
+	else:
+		stun_timer.start()
+
+
+func kill():
+	enemy_died.emit()
 
 
 func freeze():
+	velocity.x = 0
 	canMove = false
 	canAttack = false
 

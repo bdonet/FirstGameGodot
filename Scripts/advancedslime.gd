@@ -2,6 +2,7 @@ extends Enemy
 
 const ATTACK_SPEED = 112
 const PATROL_SPEED = 50
+const MAX_HEALTH = 3
 
 var direction = 1
 var speed = 0
@@ -10,6 +11,10 @@ var speed = 0
 @onready var scout_ray_cast = $ScoutRayCast
 @onready var ray_cast_ledge = $RayCastLedge
 @onready var animated_sprite = $AnimatedSprite2D
+
+
+func _on_ready():
+	health = MAX_HEALTH
 
 func _physics_process(delta):
 	# Add the gravity.

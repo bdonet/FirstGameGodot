@@ -3,6 +3,7 @@ extends Node
 var score = 0
 var apples = 0
 var deaths = 0
+var kills = 0
 
 @onready var score_label = $"../CanvasLayer/RightScoreboard/ScoreLabel"
 @onready var coins = $"../Coins"
@@ -14,6 +15,7 @@ var deaths = 0
 @onready var apple = $"../Apple"
 @onready var death_label = $"../CanvasLayer/LeftScoreboard/DeathLabel"
 @onready var apple_platform_animation_player = $"../Platforms/ApplePlatform/AnimationPlayer"
+@onready var kills_label = $"../Labels/CreditLabels/KillsLabel"
 
 func add_point():
 	score += 1
@@ -27,9 +29,14 @@ func _on_ready():
 func setScoreLabelText():
 	score_label.text = "x" + str(score)
 	score_summary.text = "Coins: " + str(score) + "/" + str(maxScore) + "\nApples: " + str(apples) + "/1"
-	
+
 func setDeathLabelText():
 	death_label.text = "x" + str(deaths)
+
+
+func setKillsLabelText():
+	kills_label.text = "Enemies killed: \n" + str(kills)
+
 
 func _on_apple_pickup():
 	apples += 1
@@ -74,3 +81,8 @@ func _on_player_fell():
 	player.kill()
 	deaths += 1
 	setDeathLabelText()
+
+
+func _on_enemy_died():
+	kills += 1
+	setKillsLabelText()
