@@ -22,6 +22,7 @@ func _on_killzone_player_died():
 
 func stun():
 	freeze()
+	velocity.x = 0
 	stun_timer.start()
 
 

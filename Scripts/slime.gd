@@ -35,11 +35,6 @@ func stun():
 	super.stun()
 
 
-func freeze():
-	velocity.x = 0
-	super.freeze()
-
-
 func unfreeze():
 	animated_sprite.play("default")
 	super.unfreeze()
