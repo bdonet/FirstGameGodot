@@ -1,11 +1,17 @@
 extends Enemy
 
 
+const MAX_HEALTH = 3
+
 var direction = 1
 
 @onready var ray_cast_wall = $RayCastWall
 @onready var ray_cast_ledge = $RayCastLedge
 @onready var animated_sprite = $AnimatedSprite2D
+
+
+func _ready():
+	health = MAX_HEALTH
 
 
 func _physics_process(delta):

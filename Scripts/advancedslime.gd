@@ -13,8 +13,9 @@ var speed = 0
 @onready var animated_sprite = $AnimatedSprite2D
 
 
-func _on_ready():
+func _ready():
 	health = MAX_HEALTH
+
 
 func _physics_process(delta):
 	# Add the gravity.
