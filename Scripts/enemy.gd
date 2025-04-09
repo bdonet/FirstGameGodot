@@ -23,11 +23,14 @@ func _on_killzone_player_died():
 
 
 func stun():
+	print("Stunned when health is " + str(health))
 	freeze()
-	if (--health == 0):
+	health -= 1
+	if (health == 0):
 		kill()
 	else:
 		stun_timer.start()
+	print("Health is now " + str(health))
 
 
 func kill():
