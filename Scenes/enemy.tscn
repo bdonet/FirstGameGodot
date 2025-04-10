@@ -6,3 +6,4 @@
 script = ExtResource("1_jgfrl")
 
 [node name="StunTimer" type="Timer" parent="."]
+one_shot = true

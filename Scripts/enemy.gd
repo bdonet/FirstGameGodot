@@ -29,7 +29,6 @@ func stun():
 		kill()
 	else:
 		stun_timer.start()
-	print("Health is now " + str(health))
 
 
 func kill():

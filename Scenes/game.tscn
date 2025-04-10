@@ -1053,7 +1053,10 @@ position = Vector2(1768, 86)
 position = Vector2(2248, 182)
 
 [node name="Slime5" parent="Enemies" instance=ExtResource("15_t5f8u")]
-position = Vector2(-2014, 278)
+position = Vector2(-2067, 278)
+
+[node name="AdvancedSlime2" parent="Enemies" instance=ExtResource("16_u2ho8")]
+position = Vector2(-2009, 275)
 
 [node name="AdvancedSlime" parent="Enemies" instance=ExtResource("16_u2ho8")]
 position = Vector2(1976, 179)
