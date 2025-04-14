@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3wamufj55sty"]
+[gd_scene load_steps=19 format=3 uid="uid://d3wamufj55sty"]
 
 [ext_resource type="PackedScene" uid="uid://k1xcr44gpyd1" path="res://Scenes/enemy.tscn" id="1_wjtk3"]
 [ext_resource type="Script" path="res://Scripts/advancedslime.gd" id="2_86o3u"]
@@ -7,6 +7,22 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n0wgw"]
 size = Vector2(10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dokqe"]
+atlas = ExtResource("2_p6yh6")
+region = Rect2(0, 72, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxq00"]
+atlas = ExtResource("2_p6yh6")
+region = Rect2(24, 72, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rydn"]
+atlas = ExtResource("2_p6yh6")
+region = Rect2(48, 72, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apxqa"]
+atlas = ExtResource("2_p6yh6")
+region = Rect2(72, 72, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dsm3w"]
 atlas = ExtResource("2_p6yh6")
@@ -38,6 +54,23 @@ region = Rect2(48, 48, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xd4ps"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dokqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxq00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rydn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apxqa")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dsm3w")
@@ -83,8 +116,10 @@ shape = SubResource("RectangleShape2D_n0wgw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_xd4ps")
-animation = &"stun"
+animation = &"death"
 autoplay = "default"
+frame = 3
+frame_progress = 1.0
 
 [node name="Killzone" parent="." index="2" instance=ExtResource("3_li4gs")]
 

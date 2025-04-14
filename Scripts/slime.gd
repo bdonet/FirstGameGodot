@@ -44,3 +44,8 @@ func stun():
 func unfreeze():
 	animated_sprite.play("default")
 	super.unfreeze()
+
+
+func kill():
+	animated_sprite.play("death")
+	super.kill()
