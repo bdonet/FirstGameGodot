@@ -1,8 +1,9 @@
-[gd_scene load_steps=53 format=3 uid="uid://y5wafvwwae4l"]
+[gd_scene load_steps=55 format=3 uid="uid://y5wafvwwae4l"]
 
 [ext_resource type="Texture2D" uid="uid://ch3chr00827ip" path="res://Assets/sprites/knight.png" id="1_bgorp"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_i7ida"]
 [ext_resource type="PackedScene" uid="uid://cqvcnfqi5hyfn" path="res://Scenes/collision_area.tscn" id="3_u0ss2"]
+[ext_resource type="Script" path="res://Scripts/AttackScanner.gd" id="4_40ud4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jql3q"]
 atlas = ExtResource("1_bgorp")
@@ -390,18 +391,47 @@ animations = [{
 radius = 4.0
 height = 14.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gp6cw"]
+radius = 6.0
+height = 16.0
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
 collision_layer = 2
 script = ExtResource("1_i7ida")
+
+[node name="ClimbStick" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(8, -16)
+rotation = -0.282079
+texture = ExtResource("1_bgorp")
+hframes = 16
+vframes = 22
+frame = 93
+
+[node name="ClimbHand" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(6, -12)
+rotation = -1.30149
+texture = ExtResource("1_bgorp")
+hframes = 16
+vframes = 22
+frame = 125
+
+[node name="AttackStick" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-6, -7)
+rotation = 1.07725
+texture = ExtResource("1_bgorp")
+hframes = 16
+vframes = 22
+frame = 93
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_m20om")
 animation = &"attack"
 autoplay = "idle"
-frame = 2
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -415,6 +445,16 @@ position = Vector2(10, -24)
 
 [node name="AreaLevel3" parent="." instance=ExtResource("3_u0ss2")]
 position = Vector2(10, -40)
+
+[node name="AttackScanner" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("4_40ud4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackScanner"]
+position = Vector2(10, -6)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_gp6cw")
 
 [node name="JumpSaveTimer" type="Timer" parent="."]
 wait_time = 0.05
@@ -454,6 +494,8 @@ one_shot = true
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="AttackScanner" to="AttackScanner" method="_on_body_entered"]
+[connection signal="body_exited" from="AttackScanner" to="AttackScanner" method="_on_body_exited"]
 [connection signal="timeout" from="JumpSaveTimer" to="." method="_on_jump_save_timer_timeout"]
 [connection signal="timeout" from="RollSaveTimer" to="." method="_on_roll_save_timer_timeout"]
 [connection signal="timeout" from="LongJumpSaveTimer" to="." method="_on_long_jump_save_timer_timeout"]

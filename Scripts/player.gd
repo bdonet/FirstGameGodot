@@ -51,6 +51,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var stun_timer = $StunTimer
 @onready var stunned_roll_timer = $StunnedRollTimer
+@onready var climb_stick = $ClimbStick
+@onready var climb_hand = $ClimbHand
+@onready var attack_stick = $AttackStick
+@onready var attack_scanner = $AttackScanner
 
 # Save the starting position so we know where to reset to on death	
 func _on_ready():
@@ -166,6 +170,24 @@ func _physics_process(delta):
 						animated_sprite.play("idle")
 					else:
 						animated_sprite.play("run")
+			
+			# Show climb and attack prompts
+			if not is_attacking and attack_scanner.enemy_detected:
+				attack_stick.visible = true
+				climb_hand.visible = false
+				climb_stick.visible = false
+			elif not is_attacking and GetClimbType() == ClimbType.Low:
+				attack_stick.visible = false
+				climb_hand.visible = true
+				climb_stick.visible = false
+			elif not is_attacking and GetClimbType() == ClimbType.High:
+				attack_stick.visible = false
+				climb_hand.visible = false
+				climb_stick.visible = true
+			else:
+				attack_stick.visible = false
+				climb_hand.visible = false
+				climb_stick.visible = false
 			
 			# Stop long jumping, if applicable
 			if is_on_floor():
