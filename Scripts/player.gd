@@ -125,6 +125,11 @@ func _physics_process(delta):
 	# Save the current falling speed for next method run
 	previous_falling_speed = velocity.y
 	
+	# Hide climb and attack prompts from last frame
+	attack_stick.visible = false
+	climb_hand.visible = false
+	climb_stick.visible = false
+	
 	if not can_move:
 		# Stop the player
 		velocity.x = 0
@@ -172,15 +177,15 @@ func _physics_process(delta):
 						animated_sprite.play("run")
 			
 			# Show climb and attack prompts
-			if not is_attacking and attack_scanner.enemy_detected:
+			if attack_scanner.enemy_detected:
 				attack_stick.visible = true
 				climb_hand.visible = false
 				climb_stick.visible = false
-			elif not is_attacking and GetClimbType() == ClimbType.Low:
+			elif GetClimbType() == ClimbType.Low:
 				attack_stick.visible = false
 				climb_hand.visible = true
 				climb_stick.visible = false
-			elif not is_attacking and GetClimbType() == ClimbType.High:
+			elif GetClimbType() == ClimbType.High:
 				attack_stick.visible = false
 				climb_hand.visible = false
 				climb_stick.visible = true
