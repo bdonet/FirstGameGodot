@@ -34,6 +34,9 @@ var can_roll = false
 var just_landed = false
 var rolling_direction
 var start_position
+var climb_hand_rotation
+var climb_stick_rotation
+var attack_stick_rotation
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -59,6 +62,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Save the starting position so we know where to reset to on death	
 func _on_ready():
 	start_position = position
+	climb_hand_rotation = climb_hand.rotation_degrees
+	climb_stick_rotation = climb_stick.rotation_degrees
+	attack_stick_rotation = attack_stick.rotation_degrees
 
 func freeze():
 	can_move = false
@@ -254,14 +260,22 @@ func _physics_process(delta):
 			# Flip the sprites and movement objects to face the current direction
 			if direction > 0:
 				animated_sprite.flip_h = false
-				area_level_1.position.x = abs(area_level_1.position.x)
-				area_level_2.position.x = abs(area_level_2.position.x)
-				area_level_3.position.x = abs(area_level_3.position.x)
+				area_level_1.unmirror()
+				area_level_2.unmirror()
+				area_level_3.unmirror()
+				attack_scanner.unmirror()
+				attack_stick.unmirror()
+				climb_hand.unmirror()
+				climb_stick.unmirror()
 			elif direction < 0:
 				animated_sprite.flip_h = true
-				area_level_1.position.x = -abs(area_level_1.position.x)
-				area_level_2.position.x = -abs(area_level_2.position.x)
-				area_level_3.position.x = -abs(area_level_3.position.x)
+				area_level_1.mirror()
+				area_level_2.mirror()
+				area_level_3.mirror()
+				attack_scanner.mirror()
+				attack_stick.mirror()
+				climb_hand.mirror()
+				climb_stick.mirror()
 		
 		# Move the player
 		if is_rolling:

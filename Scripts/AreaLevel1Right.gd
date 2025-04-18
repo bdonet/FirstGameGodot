@@ -8,3 +8,11 @@ func _on_body_entered(_body):
 
 func _on_body_exited(_body):
 	isColliding = false
+
+
+func mirror():
+	position.x = -abs(position.x)
+
+
+func unmirror():
+	position.x = abs(position.x)
