@@ -32,6 +32,7 @@ func stun():
 
 
 func kill():
+	stun_timer.stop()
 	enemy_died.emit()
 
 
