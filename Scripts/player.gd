@@ -50,7 +50,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var climb_save_timer = $ClimbSaveTimer
 @onready var roll_save_timer = $RollSaveTimer
 @onready var attack_save_timer = $AttackSaveTimer
-@onready var attack_timer = $AttackTimer
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var stun_timer = $StunTimer
 @onready var stunned_roll_timer = $StunnedRollTimer
@@ -381,12 +380,8 @@ func attack():
 	attack_saved = false
 	is_attacking = true
 	animated_sprite.play("attack")
-	attack_timer.start()
-	reset_saved_moves()
-
-
-func _on_attack_timer_timeout():
 	player_attacked.emit(position, animated_sprite.flip_h)
+	reset_saved_moves()
 
 
 func reset_saved_moves():

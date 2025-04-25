@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://y5wafvwwae4l"]
+[gd_scene load_steps=56 format=3 uid="uid://y5wafvwwae4l"]
 
 [ext_resource type="Texture2D" uid="uid://ch3chr00827ip" path="res://Assets/sprites/knight.png" id="1_bgorp"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_i7ida"]
@@ -7,14 +7,6 @@
 [ext_resource type="Script" path="res://Scripts/AttackStick.gd" id="3_ngwdx"]
 [ext_resource type="PackedScene" uid="uid://cqvcnfqi5hyfn" path="res://Scenes/collision_area.tscn" id="3_u0ss2"]
 [ext_resource type="Script" path="res://Scripts/AttackScanner.gd" id="4_40ud4"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jql3q"]
-atlas = ExtResource("1_bgorp")
-region = Rect2(0, 320, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d2eby"]
-atlas = ExtResource("1_bgorp")
-region = Rect2(32, 320, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8wtk0"]
 atlas = ExtResource("1_bgorp")
@@ -199,12 +191,6 @@ region = Rect2(160, 256, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_m20om"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jql3q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d2eby")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8wtk0")
 }],
@@ -435,7 +421,7 @@ script = ExtResource("3_ngwdx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_m20om")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -493,10 +479,6 @@ one_shot = true
 wait_time = 0.05
 one_shot = true
 
-[node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackScanner" to="AttackScanner" method="_on_body_entered"]
@@ -509,4 +491,3 @@ one_shot = true
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="StunnedRollTimer" to="." method="_on_stunned_roll_timer_timeout"]
 [connection signal="timeout" from="AttackSaveTimer" to="." method="_on_attack_save_timer_timeout"]
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
