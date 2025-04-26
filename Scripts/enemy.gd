@@ -14,6 +14,7 @@ signal enemy_died
 
 var canMove = true
 var canAttack = true
+var is_dead = false
 var health = 1
 
 
@@ -33,7 +34,9 @@ func stun():
 
 func kill():
 	stun_timer.stop()
-	enemy_died.emit()
+	if (not is_dead):
+		is_dead = true
+		enemy_died.emit()
 
 
 func freeze():
