@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://y5wafvwwae4l"]
+[gd_scene load_steps=58 format=3 uid="uid://y5wafvwwae4l"]
 
 [ext_resource type="Texture2D" uid="uid://ch3chr00827ip" path="res://Assets/sprites/knight.png" id="1_bgorp"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_i7ida"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/AttackStick.gd" id="3_ngwdx"]
 [ext_resource type="PackedScene" uid="uid://cqvcnfqi5hyfn" path="res://Scenes/collision_area.tscn" id="3_u0ss2"]
 [ext_resource type="Script" path="res://Scripts/AttackScanner.gd" id="4_40ud4"]
+[ext_resource type="Script" path="res://Scripts/AreaUpper.gd" id="7_g2so2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8wtk0"]
 atlas = ExtResource("1_bgorp")
@@ -380,6 +381,9 @@ animations = [{
 radius = 4.0
 height = 14.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h16kv"]
+size = Vector2(8, 8)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gp6cw"]
 radius = 6.0
 height = 16.0
@@ -437,6 +441,13 @@ position = Vector2(10, -24)
 [node name="AreaLevel3" parent="." instance=ExtResource("3_u0ss2")]
 position = Vector2(10, -40)
 
+[node name="AreaUpper" type="Area2D" parent="."]
+script = ExtResource("7_g2so2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaUpper"]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_h16kv")
+
 [node name="AttackScanner" type="Area2D" parent="."]
 position = Vector2(10, -6)
 collision_layer = 0
@@ -481,6 +492,8 @@ one_shot = true
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="AreaUpper" to="AreaUpper" method="_on_body_entered"]
+[connection signal="body_exited" from="AreaUpper" to="AreaUpper" method="_on_body_exited"]
 [connection signal="body_entered" from="AttackScanner" to="AttackScanner" method="_on_body_entered"]
 [connection signal="body_exited" from="AttackScanner" to="AttackScanner" method="_on_body_exited"]
 [connection signal="timeout" from="JumpSaveTimer" to="." method="_on_jump_save_timer_timeout"]

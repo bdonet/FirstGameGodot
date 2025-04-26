@@ -1,4 +1,4 @@
-extends AnimatableBody2D
+extends Platform
 
 signal player_boarded
 

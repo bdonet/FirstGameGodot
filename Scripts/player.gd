@@ -45,6 +45,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var area_level_1 = $AreaLevel1
 @onready var area_level_2 = $AreaLevel2
 @onready var area_level_3 = $AreaLevel3
+@onready var area_upper = $AreaUpper
 @onready var jump_save_timer = $JumpSaveTimer
 @onready var long_jump_save_timer = $LongJumpSaveTimer
 @onready var climb_save_timer = $ClimbSaveTimer
@@ -296,9 +297,9 @@ enum ClimbType {
 }
 	
 func GetClimbType():
-	if area_level_1.isColliding and !area_level_2.isColliding:
+	if area_level_1.isColliding and !area_level_2.isColliding and !area_upper.isColliding:
 		return ClimbType.Low
-	elif area_level_2.isColliding and !area_level_3.isColliding:
+	elif area_level_2.isColliding and !area_level_3.isColliding and !area_upper.isColliding:
 		return ClimbType.High
 		
 	return ClimbType.None
